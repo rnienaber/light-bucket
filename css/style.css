@@ -1,6 +1,6 @@
 body {
     padding-top: 60px;
-    background-image: url("../backgrounds/black_linen_v2.png");
+    background-image: url("../backgrounds/whitey.png");
 }
 
 @media (max-width: 979px) {
@@ -12,13 +12,37 @@ body {
 .navbar-inverse .navbar-inner {
     font-family: 'Grand Hotel', cursive;
     background-color: #ffffff;
-    background-image: url("../backgrounds/whitey.png");
+    background-image: url("../backgrounds/black_linen_v2.png");
     background-repeat: repeat-x;
     border-color: #c9c9c9;
+    color: #c9c9c9;
 }
 
-.navbar-inverse .navbar-inner h1{
+.navbar-inverse .navbar-inner h1 {
     font-weight: normal;
     font-size: 30px;
     line-height: 30px;
 }
+
+.box {
+    background-color: white;
+    width: 220px;
+    margin: 10px;
+    float: left;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+.box img{
+    padding-bottom: 10px;
+}
+
+.box p{
+    font-size: 11px;
+}
+
+.box .people{
+    color: #8C7E7E;
+    float: right;
+}
+
