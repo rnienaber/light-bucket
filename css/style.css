@@ -1,0 +1,24 @@
+body {
+    padding-top: 60px;
+    background-image: url("../backgrounds/black_linen_v2.png");
+}
+
+@media (max-width: 979px) {
+    body {
+        padding-top: 0px;
+    }
+}
+
+.navbar-inverse .navbar-inner {
+    font-family: 'Grand Hotel', cursive;
+    background-color: #ffffff;
+    background-image: url("../backgrounds/whitey.png");
+    background-repeat: repeat-x;
+    border-color: #c9c9c9;
+}
+
+.navbar-inverse .navbar-inner h1{
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 30px;
+}
