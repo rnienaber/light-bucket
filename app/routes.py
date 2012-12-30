@@ -1,5 +1,6 @@
 import os
 from app.utils import render
+from lib.getimageinfo import getImageInfo
 from lib.bottle import route, static_file, redirect
 
 WORKING_DIR = os.getcwd()
@@ -28,7 +29,14 @@ def event(year, month, event):
   
   #TODO: add security so you can't list files using relative paths
   url_path = '/photos/{0}/{1}/{2}'.format(year, month, event)
-  photos = [{'photo': '{0}/{1}'.format(url_path, p)} for p in os.walk(event_dir).next()[2]]
+  photos = []
+  for p in os.walk(event_dir).next()[2]:
+    with open(os.path.join(event_dir, p), 'rb') as photo_file:
+      data = photo_file.read(40)
+    content_type, width, height = getImageInfo(data)
+
+    photos.append({'photo': '{0}/{1}'.format(url_path, p),
+                   'width': width, 'height': height})
 
   return render('event', {'photos': photos})
     

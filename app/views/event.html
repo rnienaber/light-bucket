@@ -1,7 +1,10 @@
       <div class="container-fluid">
         <div id="gallery" class="row-fluid">
             {{#photos}}
-            <div class="box"><img src="{{photo}}"></div>
+            <div class="box">
+              <img src="{{photo}}">
+              <p class="people">Width: {{width}}, Height: {{height}}</p>
+            </div>
             {{/photos}}
         </div>
     </div>
