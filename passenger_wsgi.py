@@ -5,8 +5,11 @@ import sys
 cwd = os.getcwd()
 sys.path.append(cwd)
 
+DEV_MODE = False
+
+
 from lib import bottle
-from lib.bottle import route
+from lib.bottle import route, static_file
 # assuming this module is in the same dir as passenger_wsgi, this now works!
 
 import logging
@@ -16,7 +19,13 @@ logging.info("Running %s", sys.executable)
 
 @route('/')
 def index():
-  return "it works!"
+  with open('index.html', 'r') as index_file:
+    return [index_file.read()]
+    
+@route('/<filepath:path>')
+def server_static(filepath):
+    public_dir = '/public' if DEV_MODE else ''
+    return static_file(filepath, root=cwd + public_dir)
 
 def application(environ, start_response):
   try:
@@ -27,5 +36,6 @@ def application(environ, start_response):
 
 if __name__ == "__main__": 
   from lib.bottle import run
+  DEV_MODE = True
   bottle.debug(True) 
   run(reloader=True) 
