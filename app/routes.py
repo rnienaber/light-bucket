@@ -7,6 +7,8 @@ WORKING_DIR = os.getcwd()
 PUBLIC_DIR = os.path.join(WORKING_DIR, 'public')
 PHOTO_DIR = os.path.join(PUBLIC_DIR, 'photos')
 IMG_DIR = os.path.join(PUBLIC_DIR, 'img')
+JS_DIR = os.path.join(PUBLIC_DIR, 'js')
+CSS_DIR = os.path.join(PUBLIC_DIR, 'css')
 
 @route('/')
 def index():
@@ -18,7 +20,15 @@ def index():
 @route('/img/<filepath:path>')
 def server_static(filepath):
   return static_file(filepath, root=IMG_DIR)
-    
+
+@route('/js/<filepath:path>')
+def server_static(filepath):
+  return static_file(filepath, root=JS_DIR)
+
+@route('/css/<filepath:path>')
+def server_static(filepath):
+  return static_file(filepath, root=CSS_DIR)
+  
 @route('/<year>/<month>/<event>/')
 def event_redirect(year, month, event):
   redirect('/{0}/{1}/{2}'.format(year, month, event), 301)
@@ -39,7 +49,18 @@ def event(year, month, event):
                    'width': width, 'height': height})
 
   return render('event', {'photos': photos})
-    
+
+@route('/<year>/<month>/')
+def month_redirect(year, month):
+  redirect('/{0}/{1}'.format(year, month), 301)
+  
+@route('/<year>/<month>')  
+def month(year, month):
+  month_dir = os.path.join(PHOTO_DIR, year, month)
+  events = [{'event': e.replace('_', ' ').title() } for e in os.walk(month_dir).next()[1]]
+  
+  return render('month', {'events': events})
+  
 @route('/<filepath:path>')
 def server_static(filepath):
   return static_file(filepath, root=PUBLIC_DIR)
