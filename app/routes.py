@@ -1,4 +1,5 @@
 import os
+import calendar
 from app.utils import render
 from lib.getimageinfo import getImageInfo
 from lib.bottle import route, static_file, redirect
@@ -28,6 +29,10 @@ def server_static(filepath):
 @route('/css/<filepath:path>')
 def server_static(filepath):
   return static_file(filepath, root=CSS_DIR)
+
+@route('/favicon.ico')
+def server_static():
+  return static_file('favicon.ico', root=PUBLIC_DIR)
   
 @route('/<year>/<month>/<event>/')
 def event_redirect(year, month, event):
@@ -59,14 +64,26 @@ def month(year, month):
   month_dir = os.path.join(PHOTO_DIR, year, month)
   
   events = []
-  def create_event(e):
+  for e in os.walk(month_dir).next()[1]:
     events.append({'title': e.replace('_', ' ').title(), 
                    'url': '/{0}/{1}/{2}'.format(year, month, e)})
-  
-  for e in os.walk(month_dir).next()[1]:
-    create_event(e)
     
   return render('month', {'events': events})
+  
+@route('/<year>/')
+def year_redirect(year):
+  redirect('/{0}'.format(year), 301)
+  
+@route('/<year>')  
+def year(year):
+  year_dir = os.path.join(PHOTO_DIR, year)
+  
+  months = []
+  for m in os.walk(year_dir).next()[1]:
+    months.append({'month': calendar.month_name[int(m)], 
+                   'url': '/{0}/{1}'.format(year, m)})
+    
+  return render('year', {'months': months})
   
 @route('/<filepath:path>')
 def server_static(filepath):
