@@ -1,10 +1,16 @@
-      <div class="container-fluid">
-        <div id="gallery" class="row-fluid">
-            {{#photos}}
-            <div class="box">
-              <img src="{{photo}}">
-              <p class="people">Width: {{width}}, Height: {{height}}</p>
-            </div>
-            {{/photos}}
-        </div>
+<div id="gallery" class="row">
+
+    <div class="box navigation">
+        <h1>Year - Month - Album</h1>
+        <p>Here is where there is some text about the album. That would go here.</p>
+        <p>See more photos from <a href="#">something</a></p>
     </div>
+
+    {{#photos}}
+
+    <div class="box">
+      <img src="{{photo}}">
+      <p class="people">Width: {{width}}, Height: {{height}}</p>
+    </div>
+    {{/photos}}
+</div>
