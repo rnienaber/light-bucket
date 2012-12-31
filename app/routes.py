@@ -57,8 +57,15 @@ def month_redirect(year, month):
 @route('/<year>/<month>')  
 def month(year, month):
   month_dir = os.path.join(PHOTO_DIR, year, month)
-  events = [{'event': e.replace('_', ' ').title() } for e in os.walk(month_dir).next()[1]]
   
+  events = []
+  def create_event(e):
+    events.append({'title': e.replace('_', ' ').title(), 
+                   'url': '/{0}/{1}/{2}'.format(year, month, e)})
+  
+  for e in os.walk(month_dir).next()[1]:
+    create_event(e)
+    
   return render('month', {'events': events})
   
 @route('/<filepath:path>')
