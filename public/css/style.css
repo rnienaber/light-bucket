@@ -18,27 +18,35 @@ body {
     color: #c9c9c9;
 }
 
-.navbar-inverse .navbar-inner h1 {
+.navbar-inverse .brand {
     font-weight: normal;
     font-size: 30px;
+    line-height: 30px;
+    margin-left: 10px;
+    margin-right: 40px;
+}
+
+.navbar-inverse .navbar-inner li {
+    font-weight: normal;
+    font-size: 22px;
     line-height: 30px;
 }
 
 .box {
     background-color: white;
-    width: 220px;
+    width: 200px;   /* 5 columns*/
+    /*width: 260px;  *//* 4 columns */
+    /*width: 360px;  *//* 3 columns */
     margin: 10px;
     float: left;
     padding: 10px;
     box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+    font-size: 11px;
 }
 
 .box img{
-    padding-bottom: 10px;
-}
-
-.box p{
-    font-size: 11px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
 }
 
 .box .people{
@@ -46,3 +54,20 @@ body {
     float: right;
 }
 
+.navigation {
+    background-image: url("../img/backgrounds/black_linen_v2.png");
+    color: #c9c9c9;
+}
+
+.navigation h1{
+    font-family: 'Grand Hotel', cursive;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    margin-top: 0;
+    border-bottom: 1px solid #c9c9c9;
+}
+
+.navigation a:hover {
+    color: #0088CC;
+}

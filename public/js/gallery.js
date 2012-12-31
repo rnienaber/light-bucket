@@ -3,10 +3,11 @@ $(document).ready(function(){
     $gallery.imagesLoaded(function(){
         $gallery.masonry({
         itemSelector : '.box',
-        columnWidth : 260
+        columnWidth : 240  // 5 columns
+//        columnWidth: 300 // 4 columns
+//        columnWidth: 400 // 3 columns
       });
     });
-
 });
 
 
