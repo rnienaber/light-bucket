@@ -32,7 +32,7 @@ def event(year, month, event):
   photos = []
   for p in os.walk(event_dir).next()[2]:
     with open(os.path.join(event_dir, p), 'rb') as photo_file:
-      data = photo_file.read(40)
+      data = photo_file.read(81000)
     content_type, width, height = getImageInfo(data)
 
     photos.append({'photo': '{0}/{1}'.format(url_path, p),

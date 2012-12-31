@@ -1,4 +1,4 @@
-import StringIO
+import cStringIO
 import struct
 
 def getImageInfo(data):
@@ -37,7 +37,7 @@ def getImageInfo(data):
     # handle JPEGs
     elif (size >= 2) and data.startswith('\377\330'):
         content_type = 'image/jpeg'
-        jpeg = StringIO.StringIO(data)
+        jpeg = cStringIO.StringIO(data)
         jpeg.read(2)
         b = jpeg.read(1)
         try:
