@@ -3,7 +3,8 @@
 <head>
     <title>Photo Gallery</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel&subset=latin,latin-ext' rel='stylesheet'
+          type='text/css'>
 
     <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -11,65 +12,113 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container-fluid">
-            <h1>Photo Gallery</h1>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid">
-        <div id="gallery" class="row-fluid">
-            <div class="box">
-                <img src="/photos/2011/08/canoe_the_wye/IMG_6076.jpg">
-                <p>This is a picture</p>
-            </div>
-
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6077.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6078.jpg">
-                <p>We went on a trip with a bunch of friends on the Wye River</p>
-                <p class="people">with Richard, Rachel, Debbie, Graham</p>
-            </div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6081.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6085.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6087.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6089.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6092.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6094.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6095.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6096.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6100.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6103.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6104.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6109.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6112.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6114.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6115.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6116.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6117.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6121.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6125.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6129.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6136.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6138.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6144.jpg"></div>
-            <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6153.jpg"></div>
-
-            <!--<div class="box">1</div>-->
-            <!--<div class="box">2</div>-->
-            <!--<div class="box">3</div>-->
-            <!--<div class="box">4</div>-->
-            <!--<div class="box">5</div>-->
-            <!--<div class="box">6</div>-->
-
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <!--<div class="navbar-inner">-->
+    <!--<div class="container-fluid">-->
+    <!--<div class="row">-->
+    <!--<div class="span3">-->
+    <!--<h1>Photo Gallery</h1>-->
+    <!--</div>-->
+    <!--<div class="span9">-->
+    <!--<ul class="breadcrumb">-->
+    <!--<li><a href="#">Home</a> <span class="divider">/</span></li>-->
+    <!--<li><a href="#">Library</a> <span class="divider">/</span></li>-->
+    <!--<li class="active">Data</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="#">Photo Gallery</a>
+            <ul class="nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">2011</a></li>
+                <li><a href="#">August</a></li>
+            </ul>
         </div>
     </div>
 
-    <script src="/js/jquery-1.8.3.min.js"></script>
-    <script src="/js/jquery.masonry.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/gallery.js"></script>
+
+</div>
+
+<div class="container">
+
+    <!--<div class="tabbable tabs-left">-->
+    <!--<ul class="nav nav-tabs">-->
+    <!--<li><a href="#home" data-toggle="tab">Home</a></li>-->
+    <!--<li><a href="#profile" data-toggle="tab">Profile</a></li>-->
+    <!--<li><a href="#messages" data-toggle="tab">Messages</a></li>-->
+    <!--<li><a href="#settings" data-toggle="tab">Settings</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+
+
+    <div id="gallery" class="row">
+
+        <div class="box navigation">
+            <h1>2011 - August - Canoe The Wye</h1>
+
+            <p>Then we have some text here about the trip maybe. We'll have to see what fits.</p>
+
+            <p>See more photos from <a href="#">August</a></p>
+        </div>
+
+        <div class="box">
+            <img src="/photos/2011/08/canoe_the_wye/IMG_6076.jpg">
+
+            <p>This is a picture</p>
+
+            <p class="people">with Richard</p>
+        </div>
+
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6077.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6078.jpg">
+
+            <p>We went on a trip with a bunch of friends on the Wye River</p>
+
+            <p class="people">with Richard, Rachel, Debbie, Graham</p>
+        </div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6081.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6085.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6087.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6089.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6092.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6094.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6095.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6096.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6100.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6103.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6104.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6109.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6112.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6114.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6115.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6116.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6117.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6121.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6125.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6129.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6136.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6138.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6144.jpg"></div>
+        <div class="box"><img src="/photos/2011/08/canoe_the_wye/IMG_6153.jpg"></div>
+
+        <!--<div class="box">1</div>-->
+        <!--<div class="box">2</div>-->
+        <!--<div class="box">3</div>-->
+        <!--<div class="box">4</div>-->
+        <!--<div class="box">5</div>-->
+        <!--<div class="box">6</div>-->
+
+    </div>
+</div>
+
+<script src="/js/jquery-1.8.3.min.js"></script>
+<script src="/js/jquery.masonry.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/gallery.js"></script>
 </body>
 </html>
 
