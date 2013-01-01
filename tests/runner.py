@@ -1,6 +1,5 @@
 import sys
-sys.path.insert(0, '..')
-sys.path.insert(1, '../lib')
+sys.path.insert(0, '../lib')
 sys.path.insert(1, '../app')
 
 import unittest2 as unittest

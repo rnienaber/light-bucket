@@ -4,13 +4,12 @@ from app.utils import render
 from lib.getimageinfo import getImageInfo
 from lib.bottle import route, static_file, redirect
 
-WORKING_DIR = os.getcwd()
-PUBLIC_DIR = os.path.join(WORKING_DIR, 'public')
-PHOTO_DIR = os.path.join(PUBLIC_DIR, 'photos')
+#placeholder for config that is assigned on startup
+config = ''
 
 @route('/')
 def index():
-  file_path = os.path.join(WORKING_DIR, 'index.html')
+  file_path = os.path.join(config.root_dir, 'index.html')
   with open(file_path, 'r') as index_file:
     return [index_file.read()]
 
@@ -20,7 +19,7 @@ def event_redirect(year, month, event):
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<event>')
 def event(year, month, event):
-  event_dir = os.path.join(PHOTO_DIR, year, month, event)
+  event_dir = os.path.join(config.photo_dir, year, month, event)
   
   #TODO: add security so you can't list files using relative paths
   url_path = '/photos/{0}/{1}/{2}'.format(year, month, event)
@@ -41,7 +40,7 @@ def month_redirect(year, month):
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>')  
 def month(year, month):
-  month_dir = os.path.join(PHOTO_DIR, year, month)
+  month_dir = os.path.join(config.photo_dir, year, month)
   
   events = []
   for e in os.walk(month_dir).next()[1]:
@@ -56,7 +55,7 @@ def year_redirect(year):
   
 @route('/<year:re:\d{4}>')  
 def year(year):
-  year_dir = os.path.join(PHOTO_DIR, year)
+  year_dir = os.path.join(config.photo_dir, year)
   
   months = []
   for m in os.walk(year_dir).next()[1]:
@@ -64,7 +63,7 @@ def year(year):
                    'url': '/{0}/{1}'.format(year, m)})
     
   return render('year', {'months': months})
-  
+
 @route('/<filepath:path>')
 def server_static(filepath):
-  return static_file(filepath, root=PUBLIC_DIR)
+  return static_file(filepath, root=config.public_dir)
