@@ -59,6 +59,16 @@ body {
     float: right;
 }
 
+.navigation-container {
+    width: 300px;
+    float: left;
+}
+
+.gallery-container {
+    width: 900px;
+    float: left;
+}
+
 .navigation {
     background-image: url("../img/backgrounds/black_linen_v2.png");
     color: #c9c9c9;
