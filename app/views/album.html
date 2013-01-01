@@ -12,9 +12,9 @@
 
     {% for item in photos -%}
 
-    <div class="box">
+    <div class="box photo-box">
         <a class="fancybox" rel="group" href="{{item.photo}}"><img src="{{item.photo}}" alt=""></a>
-        <p class="people">Width: {{item.width}}, Height: {{item.height}}</p>
+        <p class="date right"></p>
     </div>
     {% endfor -%}
 </div>
