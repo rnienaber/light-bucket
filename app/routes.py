@@ -32,7 +32,10 @@ def event(year, month, event):
     photos.append({'photo': '{0}/{1}'.format(url_path, p),
                    'width': width, 'height': height})
 
-  return render('event', {'photos': photos})
+  return render('event', {'photos': photos,
+                          'year': year,
+                          'month_name': calendar.month_name[int(month)],
+                          'event_name': event.replace('_',' ')})
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
 def month_redirect(year, month):
@@ -47,7 +50,10 @@ def month(year, month):
     events.append({'title': e.replace('_', ' ').title(), 
                    'url': '/{0}/{1}/{2}'.format(year, month, e)})
     
-  return render('month', {'events': events})
+  return render('month', {'events': events,
+                          'year': year,
+                          'month': month,
+                          'month_name': calendar.month_name[int(month)]})
   
 @route('/<year:re:\d{4}>/')
 def year_redirect(year):
@@ -62,7 +68,7 @@ def year(year):
     months.append({'month': calendar.month_name[int(m)], 
                    'url': '/{0}/{1}'.format(year, m)})
     
-  return render('year', {'months': months})
+  return render('year', {'months': months, 'year': year})
 
 @route('/<filepath:path>')
 def server_static(filepath):

@@ -1,13 +1,12 @@
 <div id="gallery" class="row">
 
-    <div class="box navigation">
-        <h1>2011 - August</h1>
-        <p>Oh we did some cool stuff in August. Woohoo!</p>
-        <p>See more photos from <a href="#">2011</a></p>
+    <div class="box col4 navigation">
+        <h1>{{year}} - {{month_name}}</h1>
+        <p>See more photos from <a href="./">{{year}}</a></p>
     </div>
 
     {{#events}}
-    <div class="box" style="width: 260px">
+    <div class="box col4">
         <img src="/photos/2011/08/canoe_the_wye/IMG_6153.jpg">
         <p><strong><a href="{{url}}">{{title}}</a></strong></p>
         <p>Could we say more about what we did in the park. How would it look. It might look quite nice and be quite happy. It was a happy river.</p>

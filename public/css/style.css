@@ -45,6 +45,10 @@ body {
     font-size: 11px;
 }
 
+.box.col4 {
+    width: 260px;
+}
+
 .box img{
     margin-bottom: 10px;
     border: 1px solid #eee;
@@ -61,13 +65,14 @@ body {
 }
 
 .navigation h1{
-    font-family: 'Grand Hotel', cursive;
+    font-family: 'Grand Hotel', cursive, Arial;
     font-weight: normal;
     font-size: 20px;
     line-height: 30px;
     margin-top: 0;
     border-bottom: 1px solid #c9c9c9;
     text-align: center;
+    text-transform: capitalize;
 }
 
 .navigation a:hover {
