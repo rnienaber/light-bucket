@@ -11,16 +11,15 @@
 
     <div class="box col4 navigation">
         <h1>{{year}} - {{month_name}}</h1>
+        <p>{{summary['summary']}}</p>
         <p>See more photos from <a href="./">{{year}}</a></p>
     </div>
 
-    {% for item in events -%}
+    {% for item in albums -%}
     <div class="box col4">
-        <img src="/photos/2011/08/canoe_the_wye/IMG_6153.jpg">
+        <img src="/photos/{{item.url}}/{{item.summary['cover-image']}}">
         <p><strong><a href="{{item.url}}">{{item.title}}</a></strong></p>
-        <p>Could we say more about what we did in the park. How would it look. It might look quite nice and be quite happy. It was a happy river.</p>
-        <p>15th August</p>
-        <p class="people">with Richard, Debbie and Graham</p>
+        <p>{{item.summary['summary']}}</p>
     </div>
     {% endfor -%}
 </div>
