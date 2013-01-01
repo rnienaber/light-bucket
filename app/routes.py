@@ -53,7 +53,7 @@ def album(year, month, event):
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
-          'event_name': event.replace('_',' ').title(),
+          'album_name': event.replace('_',' ').title(),
           'summary': get_summary(event_dir)}
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
