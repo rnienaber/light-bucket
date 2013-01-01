@@ -53,6 +53,7 @@ def month(year, month):
     
   return render('month', {'events': events,
                           'year': year,
+                          'month': month,
                           'month_name': calendar.month_name[int(month)]})
   
 @route('/<year:re:\d{4}>/')
