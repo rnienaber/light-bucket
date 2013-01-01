@@ -41,7 +41,7 @@ def album(year, month, event):
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
-          'event_name': event.replace('_',' ').title()}
+          'album_name': event.replace('_',' ').title()}
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
 def month_redirect(year, month):

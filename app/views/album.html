@@ -1,11 +1,17 @@
 {% extends "base.html" %}
-{% block title %} - {{event_name}}{% endblock %}
+{% block title %} - {{album_name}}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="../">{{year}}</a></li>
+    <li><a href="./">{{month_name}}</a></li>
+    <li class="active"><a href="">{{album_name}}</a></li>
+{% endblock %}
 
 {% block content %}
 <div id="gallery" class="row">
 
     <div class="box navigation">
-        <h1>{{year}} - {{month_name}} - {{event_name}}</h1>
+        <h1>{{year}} - {{month_name}} - {{album_name}}</h1>
         <p>Here is where there is some text about the album. That would go here.</p>
         <p>See more photos from <a href="./">{{month_name}}</a></p>
     </div>

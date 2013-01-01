@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block title %} - {{year}} - {{month_name}}{% endblock %}
 
+{% block breadcrumb %}
+    <li><a href="./">{{year}}</a></li>
+    <li class="active"><a href="">{{month_name}}</a></li>
+{% endblock %}
+
 {% block content %}
 <div id="gallery" class="row">
 
