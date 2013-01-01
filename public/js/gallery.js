@@ -26,18 +26,21 @@ var applyImageData = function (data) {
 };
 
 var getDateForDisplay = function (date) {
-    var result = "th";
+    var result = "";
     switch (date.getDate()) {
         case 1:
         case 21:
         case 31:
             result = 'st';
+            break;
         case 2:
         case 22:
             result = 'nd';
+            break;
         case 3:
         case 23:
             result = 'rd';
+            break;
         default:
             result = 'th';
     }
