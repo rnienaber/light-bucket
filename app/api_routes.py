@@ -1,6 +1,6 @@
 import os
 from os import path
-from lib.bottle import request, route
+from bottle import request, route
 from exiftool_reader import ExifToolReader
 
 #placeholder for config that is assigned on startup

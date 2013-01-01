@@ -7,6 +7,7 @@ from subprocess import PIPE
 class Config:
   def __init__(self):
     self.app_dir = path.abspath(path.dirname(__file__))
+    self.template_path = path.join(self.app_dir, 'views')
     self.root_dir = path.dirname(self.app_dir)
     self.public_dir = path.join(self.root_dir, 'public')
     self.photo_dir = path.join(self.public_dir, 'photos')

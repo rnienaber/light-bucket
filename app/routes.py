@@ -1,8 +1,9 @@
 import os
 import calendar
-from app.utils import render
-from lib.getimageinfo import getImageInfo
-from lib.bottle import route, static_file, redirect
+from getimageinfo import getImageInfo
+import bottle
+from bottle import route, static_file, redirect
+from bottle import jinja2_view as view
 
 #placeholder for config that is assigned on startup
 config = ''
@@ -14,11 +15,12 @@ def index():
     return [index_file.read()]
 
 @route('/<year\d{4}>/<month:re:\d{2}>/<event>/')
-def event_redirect(year, month, event):
+def album_redirect(year, month, event):
   redirect('/{0}/{1}/{2}'.format(year, month, event), 301)
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<event>')
-def event(year, month, event):
+@view('album')
+def album(year, month, event):
   event_dir = os.path.join(config.photo_dir, year, month, event)
   
   #TODO: add security so you can't list files using relative paths
@@ -32,16 +34,21 @@ def event(year, month, event):
     photos.append({'photo': '{0}/{1}'.format(url_path, p),
                    'width': width, 'height': height})
 
-  return render('event', {'photos': photos,
-                          'year': year,
-                          'month_name': calendar.month_name[int(month)],
-                          'event_name': event.replace('_',' ')})
+  #TODO: clears template cache for dev
+  if config.debug:
+    bottle.TEMPLATES.clear() 
+  
+  return {'photos': photos,
+          'year': year,
+          'month_name': calendar.month_name[int(month)],
+          'event_name': event.replace('_',' ').title()}
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
 def month_redirect(year, month):
   redirect('/{0}/{1}'.format(year, month), 301)
   
-@route('/<year:re:\d{4}>/<month:re:\d{2}>')  
+@route('/<year:re:\d{4}>/<month:re:\d{2}>')
+@view('month')  
 def month(year, month):
   month_dir = os.path.join(config.photo_dir, year, month)
   
@@ -49,17 +56,22 @@ def month(year, month):
   for e in os.walk(month_dir).next()[1]:
     events.append({'title': e.replace('_', ' ').title(), 
                    'url': '/{0}/{1}/{2}'.format(year, month, e)})
-    
-  return render('month', {'events': events,
-                          'year': year,
-                          'month': month,
-                          'month_name': calendar.month_name[int(month)]})
+
+  #TODO: clears template cache for dev
+  if config.debug:
+    bottle.TEMPLATES.clear()  
+
+  return {'events': events,
+          'year': year,
+          'month': month,
+          'month_name': calendar.month_name[int(month)]}
   
 @route('/<year:re:\d{4}>/')
 def year_redirect(year):
   redirect('/{0}'.format(year), 301)
   
-@route('/<year:re:\d{4}>')  
+@route('/<year:re:\d{4}>')
+@view('year')  
 def year(year):
   year_dir = os.path.join(config.photo_dir, year)
   
@@ -67,8 +79,12 @@ def year(year):
   for m in os.walk(year_dir).next()[1]:
     months.append({'month': calendar.month_name[int(m)], 
                    'url': '/{0}/{1}'.format(year, m)})
-    
-  return render('year', {'months': months, 'year': year})
+
+  #TODO: clears template cache for dev
+  if config.debug:
+    bottle.TEMPLATES.clear()    
+  
+  return {'months': months, 'year': year}
 
 @route('/<filepath:path>')
 def server_static(filepath):

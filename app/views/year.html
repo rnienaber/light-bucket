@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+{% block title %} - {{year}}{% endblock %}
+
+{% block content %}
 <div class="row">
 
     <div class="navigation-container">
@@ -7,14 +11,15 @@
     </div>
 
     <div id="gallery" class="gallery-container">
-        {{#months}}
+        {% for item in months -%}
         <div class="box col4">
             <img src="/photos/2011/08/canoe_the_wye/IMG_6153.jpg">
-            <p><strong><a href="{{url}}">{{month}}</a></strong></p>
+            <p><strong><a href="{{item.url}}">{{item.month}}</a></strong></p>
             <p>Could we say more about what we did in the park. How would it look. It might look quite nice and be quite happy. It was a happy river.</p>
             <p>15th August</p>
             <p class="people">with Richard, Debbie and Graham</p>
         </div>
-        {{/months}}
+        {% endfor -%}
     </div>
 </div>
+{% endblock %}

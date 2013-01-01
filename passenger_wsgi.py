@@ -3,14 +3,15 @@ import sys
 
 # append current dir and lib folder to module path
 cwd = os.getcwd()
-sys.path.append(cwd)
-sys.path.append(os.path.join(cwd, 'lib'))
-sys.path.append(os.path.join(cwd, 'app'))
+sys.path.insert(0, os.path.join(cwd, 'lib'))
+sys.path.insert(1, os.path.join(cwd, 'app'))
 
-from lib import bottle
+import bottle
 
 from config import Config
 app_config = Config()
+
+bottle.TEMPLATE_PATH.insert(0, app_config.template_path)
 
 from app import api_routes, routes
 routes.config = api_routes.config = app_config
@@ -27,6 +28,7 @@ def application(environ, start_response):
     logging.exception("Error: %s", str(type(inst)))
     return []
 
-if __name__ == "__main__": 
-  bottle.debug(True) 
+if __name__ == "__main__":
+  app_config.debug = True
+  bottle.debug(app_config.debug) 
   bottle.run(reloader=True) 
