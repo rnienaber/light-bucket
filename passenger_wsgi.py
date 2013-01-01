@@ -3,8 +3,8 @@ import sys
 
 # append current dir and lib folder to module path
 cwd = os.getcwd()
-sys.path.insert(0, os.path.join(cwd, 'lib'))
-sys.path.insert(1, os.path.join(cwd, 'app'))
+for d in ['app', 'lib', '']:
+  sys.path.insert(0, os.path.join(cwd, d))
 
 import bottle
 
@@ -20,6 +20,7 @@ import logging
 logfilename = os.path.join(cwd, 'log', 'passenger_wsgi.log')
 logging.basicConfig(filename=logfilename, level=logging.DEBUG)
 logging.info("Running %s", sys.executable)
+app_config.logging = logging 
 
 def application(environ, start_response):
   try:

@@ -6,6 +6,7 @@ from subprocess import PIPE
 
 class Config:
   def __init__(self):
+    self.debug = False
     self.app_dir = path.abspath(path.dirname(__file__))
     self.template_path = path.join(self.app_dir, 'views')
     self.root_dir = path.dirname(self.app_dir)
