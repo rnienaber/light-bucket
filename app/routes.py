@@ -4,16 +4,28 @@ from getimageinfo import getImageInfo
 import bottle
 from bottle import route, static_file, redirect
 from bottle import jinja2_view as view
+import yaml
 
 #placeholder for config that is assigned on startup
 config = ''
 
-@route('/')
-def index():
-  file_path = os.path.join(config.root_dir, 'index.html')
-  with open(file_path, 'r') as index_file:
-    return [index_file.read()]
+def get_summary(dir):
+  summary_path = os.path.join(dir, 'summary.yaml')
+  if not os.path.exists(summary_path):
+    return {}
+    
+  with open(summary_path, 'r') as summary_file:
+    return yaml.safe_load(summary_file)
 
+@route('/')
+@view('index')
+def index():
+  #TODO: clears template cache for dev
+  if config.debug:
+    bottle.TEMPLATES.clear() 
+    
+  return {'summary': get_summary(config.photo_dir)}
+  
 @route('/<year\d{4}>/<month:re:\d{2}>/<event>/')
 def album_redirect(year, month, event):
   redirect('/{0}/{1}/{2}'.format(year, month, event), 301)
@@ -41,7 +53,8 @@ def album(year, month, event):
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
-          'event_name': event.replace('_',' ').title()}
+          'event_name': event.replace('_',' ').title(),
+          'summary': get_summary(event_dir)}
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
 def month_redirect(year, month):
@@ -64,7 +77,8 @@ def month(year, month):
   return {'events': events,
           'year': year,
           'month': month,
-          'month_name': calendar.month_name[int(month)]}
+          'month_name': calendar.month_name[int(month)],
+          'summary': get_summary(month_dir)}
   
 @route('/<year:re:\d{4}>/')
 def year_redirect(year):
@@ -83,8 +97,9 @@ def year(year):
   #TODO: clears template cache for dev
   if config.debug:
     bottle.TEMPLATES.clear()    
-  
-  return {'months': months, 'year': year}
+
+  return {'months': months, 'year': year,
+          'summary': get_summary(year_dir)}
 
 @route('/<filepath:path>')
 def server_static(filepath):
