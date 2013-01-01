@@ -26,20 +26,20 @@ def index():
     
   return {'summary': get_summary(config.photo_dir)}
   
-@route('/<year\d{4}>/<month:re:\d{2}>/<event>/')
-def album_redirect(year, month, event):
-  redirect('/{0}/{1}/{2}'.format(year, month, event), 301)
+@route('/<year\d{4}>/<month:re:\d{2}>/<album>/')
+def album_redirect(year, month, album):
+  redirect('/{0}/{1}/{2}'.format(year, month, album), 301)
 
-@route('/<year:re:\d{4}>/<month:re:\d{2}>/<event>')
+@route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
 @view('album')
-def album(year, month, event):
-  event_dir = os.path.join(config.photo_dir, year, month, event)
+def album(year, month, album):
+  album_dir = os.path.join(config.photo_dir, year, month, album)
   
   #TODO: add security so you can't list files using relative paths
-  url_path = '/photos/{0}/{1}/{2}'.format(year, month, event)
+  url_path = '/photos/{0}/{1}/{2}'.format(year, month, album)
   photos = []
-  for p in os.walk(event_dir).next()[2]:
-    with open(os.path.join(event_dir, p), 'rb') as photo_file:
+  for p in os.walk(album_dir).next()[2]:
+    with open(os.path.join(album_dir, p), 'rb') as photo_file:
       data = photo_file.read(81000)
     content_type, width, height = getImageInfo(data)
 
@@ -53,8 +53,8 @@ def album(year, month, event):
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
-          'album_name': event.replace('_',' ').title(),
-          'summary': get_summary(event_dir)}
+          'album_name': album.replace('_',' ').title(),
+          'summary': get_summary(album_dir)}
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/')
 def month_redirect(year, month):
@@ -65,16 +65,17 @@ def month_redirect(year, month):
 def month(year, month):
   month_dir = os.path.join(config.photo_dir, year, month)
   
-  events = []
+  albums = []
   for e in os.walk(month_dir).next()[1]:
-    events.append({'title': e.replace('_', ' ').title(), 
-                   'url': '/{0}/{1}/{2}'.format(year, month, e)})
+    albums.append({'title': e.replace('_', ' ').title(), 
+                   'url': '/{0}/{1}/{2}'.format(year, month, e),
+                   'summary': get_summary(os.path.join(month_dir, e))})
 
   #TODO: clears template cache for dev
   if config.debug:
     bottle.TEMPLATES.clear()  
 
-  return {'events': events,
+  return {'albums': albums,
           'year': year,
           'month': month,
           'month_name': calendar.month_name[int(month)],
@@ -92,7 +93,8 @@ def year(year):
   months = []
   for m in os.walk(year_dir).next()[1]:
     months.append({'month': calendar.month_name[int(m)], 
-                   'url': '/{0}/{1}'.format(year, m)})
+                   'url': '/{0}/{1}'.format(year, m),
+                   'summary': get_summary(os.path.join(year_dir, m))})
 
   #TODO: clears template cache for dev
   if config.debug:
