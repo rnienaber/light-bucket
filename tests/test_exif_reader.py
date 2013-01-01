@@ -81,7 +81,13 @@ class TestExifReader(unittest2.TestCase):
         tags = reader.get_exif('IMG_3277.jpg', 'date')
 
         self.assertEquals(len(tags.keys()), 1)
-        self.assertEquals(tags['date'], '2012-06-17T08:55:51')
+        self.assertEquals(tags['date'], '2012-06-03T18:16:49')
+        
+    def test_should_return_date2(self):
+        tags = reader.get_exif('wilderness-01.jpg', 'date')
+
+        self.assertEquals(len(tags.keys()), 1)
+        self.assertEquals(tags['date'], '2009-01-09T08:50:41')
 
     def test_should_return_subject(self):
         tags = reader.get_exif('IMG_3277.jpg', 'subject')

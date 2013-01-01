@@ -47,7 +47,7 @@ def normalize_tags(tag_list):
   
 def execute_tool(config, file_paths):
     command = [config.perl_executable_path, config.exiftool_script_path]
-    switches = r'-j -q -personinimage -gpslatitude -gpslongitude -xpcomment -xpkeywords -xpsubject -modifydate -xpsubject -xpcomment -xptitle -make -model -c %.8f -d %Y-%m-%dT%H:%M:%S -S'.split(' ')
+    switches = r'-j -q -personinimage -gpslatitude -gpslongitude -xpcomment -xpkeywords -xpsubject -createdate -xpsubject -xpcomment -xptitle -make -model -c %.8f -d %Y-%m-%dT%H:%M:%S -S'.split(' ')
     all_files = [os.path.abspath(f) for f in file_paths]
 
     full_command = command + switches + all_files
@@ -74,7 +74,7 @@ def parse_exif_output(info, tags):
     add_key('XPSubject', 'subject')
     add_key('Make', 'make')
     add_key('Model', 'model')
-    add_key('ModifyDate', 'date')
+    add_key('CreateDate', 'date')
     add_key('PersonInImage', 'person_in_image', clean_list)
 
     return result
