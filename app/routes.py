@@ -39,6 +39,9 @@ def album(year, month, album):
   url_path = '/photos/{0}/{1}/{2}'.format(year, month, album)
   photos = []
   for p in os.walk(album_dir).next()[2]:
+    if not p.lower().endswith(('.jpg', '.jpeg')):
+      continue
+      
     with open(os.path.join(album_dir, p), 'rb') as photo_file:
       data = photo_file.read(81000)
     content_type, width, height = getImageInfo(data)
