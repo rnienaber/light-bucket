@@ -1,0 +1,91 @@
+import os
+from subprocess import Popen, PIPE
+import simplejson as json
+
+class ExifToolReader(object):
+  def __init__(self, config):
+    self.config = config
+
+  def get_exif(self, relative_image_path, tag_list=None):
+    return self.get_exifs(relative_image_path, tag_list).values()[0]
+
+  def get_exifs(self, relative_image_paths, tag_list=None):
+    if not isinstance(relative_image_paths, list):
+      relative_image_paths = [relative_image_paths]
+
+    file_paths = [get_photo_path(self.config.photo_dir, f) for f in relative_image_paths]
+
+    tags = normalize_tags(tag_list)
+    tool_output = execute_tool(self.config, file_paths)
+
+    abs_len = len(os.path.abspath(self.config.photo_dir))
+    abs_len += 1 if self.config.photo_dir.startswith('.') else 0
+
+    result = {}
+    for info in tool_output:
+      file_path = info['SourceFile'].strip(' .')
+      relative_file_path = file_path[abs_len:].strip('/')
+
+      keypairs = parse_exif_output(info, tags)
+      result[relative_file_path] = keypairs
+
+    return result
+
+
+def get_photo_path(photo_dir, relative_image_path):
+    file_path = os.path.join(photo_dir, relative_image_path)
+    if not os.path.exists(file_path):
+        raise IOError("image file '" + file_path + "' doesn't exist")
+    return file_path
+
+def normalize_tags(tag_list):
+    tags = [] 
+    if not tag_list in ['', None]:
+        tags = [t.strip().lower() for t in tag_list.split(',')]
+    return tags
+
+  
+def execute_tool(config, file_paths):
+    command = [config.perl_executable_path, config.exiftool_script_path]
+    switches = r'-j -q -personinimage -gpslatitude -gpslongitude -xpcomment -xpkeywords -xpsubject -modifydate -xpsubject -xpcomment -xptitle -make -model -c %.8f -d %Y-%m-%dT%H:%M:%S -S'.split(' ')
+    all_files = [os.path.abspath(f) for f in file_paths]
+
+    full_command = command + switches + all_files
+
+    process = Popen(full_command, stdout=PIPE)
+    output = process.communicate()[0]
+
+    return json.loads(output.strip())
+
+def parse_exif_output(info, tags):
+    result = {}
+    def add_key(exif_tag, processed_tag, processor=None):
+        if processed_tag.lower() in tags or tags == []:
+            if exif_tag in info:
+                value = info[exif_tag]
+                processed = processor(value) if processor else value
+                result[processed_tag] = processed
+
+    add_key('GPSLongitude', 'longitude', gps_to_decimal)
+    add_key('GPSLatitude', 'latitude', gps_to_decimal)
+    add_key('XPComment', 'comment')
+    add_key('XPKeywords', 'keywords', clean_list)
+    add_key('XPTitle', 'title')
+    add_key('XPSubject', 'subject')
+    add_key('Make', 'make')
+    add_key('Model', 'model')
+    add_key('ModifyDate', 'date')
+    add_key('PersonInImage', 'person_in_image', clean_list)
+
+    return result
+
+
+def gps_to_decimal(value):
+    decimal, direction = value.split(' ') 
+    multiplier = -1 if direction in ['W', 'S'] else 1
+
+    return float(decimal) * multiplier
+
+def clean_list(value):
+    value_list = value if isinstance(value, list) else value.split(',')
+    return ','.join([l.strip() for l in value_list])
