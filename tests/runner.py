@@ -3,7 +3,6 @@ sys.path.insert(0, '..')
 sys.path.insert(1, '../lib')
 sys.path.insert(1, '../app')
 
-import common
 import unittest2 as unittest
 
 if __name__ == "__main__":
