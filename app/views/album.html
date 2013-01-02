@@ -1,19 +1,19 @@
 {% extends "base.html" %}
-{% block title %} - {{album_name}}{% endblock %}
+{% block title %} - {{album}}{% endblock %}
 
 {% block breadcrumb %}
     <li><a href="../">{{year}}</a></li>
-    <li><a href="./">{{month_name}}</a></li>
-    <li class="active"><a href="">{{album_name}}</a></li>
+    <li><a href="./">{{month}}</a></li>
+    <li class="active"><a href="">{{album}}</a></li>
 {% endblock %}
 
 {% block content %}
 <div id="gallery" class="row">
 
     <div class="box navigation">
-        <h1>{{year}} - {{month_name}} - {{album_name}}</h1>
+        <h1>{{year}} - {{month}} - {{album}}</h1>
         <p>{{summary['summary']}}</p>
-        <p>See more photos from <a href="./">{{month_name}}</a></p>
+        <p>See more photos from <a href="./">{{month}}</a></p>
     </div>
 
     {% for item in photos -%}
