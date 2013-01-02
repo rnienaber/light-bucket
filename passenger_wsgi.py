@@ -32,5 +32,4 @@ def application(environ, start_response):
 
 if __name__ == "__main__":
   config.debug = True
-  bottle.debug(config.debug) 
-  bottle.run(app=bottle_app(), reloader=config.debug) 
+  bottle.run(app=bottle_app(), debug=config.debug) 

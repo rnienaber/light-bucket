@@ -5,14 +5,13 @@ import bottle
 from bottle import route, static_file, redirect
 from bottle import jinja2_view as view
 
-from utils import get_summary, clear_templates
+from utils import get_summary
 #placeholder for config that is assigned on startup
 from config import config
 
 @route('/')
 @view('index')
 def index():
-  clear_templates()    
   return {'summary': get_summary(config.photo_dir)}
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
@@ -34,7 +33,6 @@ def album(year, month, album):
     photos.append({'photo': '{0}/{1}'.format(url_path, p),
                    'width': width, 'height': height})
 
-  clear_templates()
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
@@ -52,7 +50,6 @@ def month(year, month):
                    'url': '/{0}/{1}/{2}'.format(year, month, e),
                    'summary': get_summary(os.path.join(month_dir, e))})
 
-  clear_templates()
   return {'albums': albums,
           'year': year,
           'month': month,
@@ -70,7 +67,6 @@ def year(year):
                    'url': '/{0}/{1}'.format(year, m),
                    'summary': get_summary(os.path.join(year_dir, m))})
 
-  clear_templates()
   return {'months': months, 'year': year,
           'summary': get_summary(year_dir)}
 
