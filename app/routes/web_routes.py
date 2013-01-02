@@ -15,10 +15,6 @@ def index():
   clear_templates()    
   return {'summary': get_summary(config.photo_dir)}
   
-@route('/<year\d{4}>/<month:re:\d{2}>/<album>/')
-def album_redirect(year, month, album):
-  redirect('/{0}/{1}/{2}'.format(year, month, album), 301)
-
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
 @view('album')
 def album(year, month, album):
@@ -45,10 +41,6 @@ def album(year, month, album):
           'album_name': album.replace('_',' ').title(),
           'summary': get_summary(album_dir)}
 
-@route('/<year:re:\d{4}>/<month:re:\d{2}>/')
-def month_redirect(year, month):
-  redirect('/{0}/{1}'.format(year, month), 301)
-  
 @route('/<year:re:\d{4}>/<month:re:\d{2}>')
 @view('month')  
 def month(year, month):
@@ -66,10 +58,6 @@ def month(year, month):
           'month': month,
           'month_name': calendar.month_name[int(month)],
           'summary': get_summary(month_dir)}
-  
-@route('/<year:re:\d{4}>/')
-def year_redirect(year):
-  redirect('/{0}'.format(year), 301)
   
 @route('/<year:re:\d{4}>')
 @view('year')  
