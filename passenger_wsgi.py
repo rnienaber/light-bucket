@@ -8,19 +8,17 @@ for d in ['app', 'lib', '']:
 
 import bottle
 
-from config import Config
-app_config = Config()
+from config import config
 
-bottle.TEMPLATE_PATH.insert(0, app_config.template_path)
+bottle.TEMPLATE_PATH.insert(0, config.template_path)
 
-from app import api_routes, routes
-routes.config = api_routes.config = app_config
+from app.routes import api_routes, web_routes
 
 import logging
 logfilename = os.path.join(cwd, 'log', 'passenger_wsgi.log')
 logging.basicConfig(filename=logfilename, level=logging.DEBUG)
 logging.info("Running %s", sys.executable)
-app_config.logging = logging 
+config.logging = logging 
 
 def application(environ, start_response):
   try:
@@ -30,6 +28,6 @@ def application(environ, start_response):
     return []
 
 if __name__ == "__main__":
-  app_config.debug = True
-  bottle.debug(app_config.debug) 
-  bottle.run(reloader=True) 
+  config.debug = True
+  bottle.debug(config.debug) 
+  bottle.run(reloader=config.debug) 

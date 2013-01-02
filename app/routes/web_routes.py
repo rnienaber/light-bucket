@@ -4,26 +4,15 @@ from getimageinfo import getImageInfo
 import bottle
 from bottle import route, static_file, redirect
 from bottle import jinja2_view as view
-import yaml
 
+from utils import get_summary, clear_templates
 #placeholder for config that is assigned on startup
-config = ''
-
-def get_summary(dir):
-  summary_path = os.path.join(dir, 'summary.yaml')
-  if not os.path.exists(summary_path):
-    return {}
-    
-  with open(summary_path, 'r') as summary_file:
-    return yaml.safe_load(summary_file)
+from config import config
 
 @route('/')
 @view('index')
 def index():
-  #TODO: clears template cache for dev
-  if config.debug:
-    bottle.TEMPLATES.clear() 
-    
+  clear_templates()    
   return {'summary': get_summary(config.photo_dir)}
   
 @route('/<year\d{4}>/<month:re:\d{2}>/<album>/')
@@ -49,10 +38,7 @@ def album(year, month, album):
     photos.append({'photo': '{0}/{1}'.format(url_path, p),
                    'width': width, 'height': height})
 
-  #TODO: clears template cache for dev
-  if config.debug:
-    bottle.TEMPLATES.clear() 
-  
+  clear_templates()
   return {'photos': photos,
           'year': year,
           'month_name': calendar.month_name[int(month)],
@@ -74,10 +60,7 @@ def month(year, month):
                    'url': '/{0}/{1}/{2}'.format(year, month, e),
                    'summary': get_summary(os.path.join(month_dir, e))})
 
-  #TODO: clears template cache for dev
-  if config.debug:
-    bottle.TEMPLATES.clear()  
-
+  clear_templates()
   return {'albums': albums,
           'year': year,
           'month': month,
@@ -99,10 +82,7 @@ def year(year):
                    'url': '/{0}/{1}'.format(year, m),
                    'summary': get_summary(os.path.join(year_dir, m))})
 
-  #TODO: clears template cache for dev
-  if config.debug:
-    bottle.TEMPLATES.clear()    
-
+  clear_templates()
   return {'months': months, 'year': year,
           'summary': get_summary(year_dir)}
 

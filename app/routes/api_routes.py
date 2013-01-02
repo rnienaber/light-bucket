@@ -4,7 +4,7 @@ from bottle import request, route
 from exiftool_reader import ExifToolReader
 
 #placeholder for config that is assigned on startup
-config = ''
+from config import config
 
 @route('/api/photo_metadata')
 def photo_metadata():

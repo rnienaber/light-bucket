@@ -4,7 +4,7 @@ import platform
 import subprocess
 from subprocess import PIPE
 
-class Config:
+class Config(object):
   def __init__(self):
     self.debug = False
     self.app_dir = path.abspath(path.dirname(__file__))
@@ -33,3 +33,5 @@ class Config:
       
     if not os.path.exists(self.perl_executable_path):
       raise Exception('Perl interpreter could not be found')
+      
+config = Config()
