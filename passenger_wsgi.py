@@ -13,6 +13,7 @@ bottle.TEMPLATE_PATH.insert(0, config.template_path)
 
 from app.routes import api_routes, web_routes
 from app.middleware import RemoveTrailingSlashesMiddleware
+from app.plugins import StripSlashesPlugin
 
 import logging
 logfilename = os.path.join(cwd, 'log', 'passenger_wsgi.log')
@@ -20,8 +21,11 @@ logging.basicConfig(filename=logfilename, level=logging.DEBUG)
 logging.info("Running %s", sys.executable)
 config.logging = logging 
 
+
 def bottle_app():
-  return RemoveTrailingSlashesMiddleware(bottle.default_app())
+  app = bottle.default_app()
+  app.install(StripSlashesPlugin())
+  return app
 
 def application(environ, start_response):
   try:
