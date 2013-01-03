@@ -17,9 +17,15 @@
 
     {% for item in albums -%}
     <div class="box col4">
+      <a href="{{item.url}}">
+        {% if item.summary['cover-image'] is defined %}
         <img src="/photos/{{item.url}}/{{item.summary['cover-image']}}">
-        <p><strong><a href="{{item.url}}">{{item.title}}</a></strong></p>
-        <p>{{item.summary['summary']}}</p>
+        {% else %}
+        <img src="{{item.first_image_url}}">
+        {% endif %}
+      </a>
+      <p><strong><a href="{{item.url}}">{{item.title}}</a></strong></p>
+      <p>{{item.summary['summary']}}</p>
     </div>
     {% endfor -%}
 </div>

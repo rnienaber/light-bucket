@@ -3,6 +3,8 @@ import calendar
 from config import config
 from utils import get_summary
 
+from models.month import Month
+
 class Year(object):
   def __init__(self, year):
     self.year = year
@@ -13,9 +15,11 @@ class Year(object):
   def to_view_data(self):
     months = []
     for m in os.walk(self.year_dir).next()[1]:
-      months.append({'month': calendar.month_name[int(m)], 
-                     'url': '/{0}/{1}'.format(self.year, m),
-                     'summary': get_summary(os.path.join(self.year_dir, m))})
+      month = Month(self.year, m)
+      months.append({'month': month.name, 
+                     'url': month.url_path,
+                     'summary': month.get_summary(),
+                     'first_image_url': month.first_image_url()})
 
     return {'months': months, 'year': self.year,
             'summary': get_summary(self.year_dir)}

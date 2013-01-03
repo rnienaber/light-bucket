@@ -15,5 +15,8 @@ def get_summary(dir):
   with open(summary_path, 'r') as summary_file:
     return yaml.safe_load(summary_file)
     
-
-
+def first(iterable, default=None):
+  if iterable:
+    for i in iterable:
+      return i
+  return default

@@ -6,6 +6,10 @@ from subprocess import PIPE
 
 class Config(object):
   def __init__(self):
+    #url paths
+    self.photo_url_path = '/photos'
+    
+    #disk paths
     self.app_dir = path.abspath(path.dirname(__file__))
     self.template_path = './app/views'
     self.root_dir = path.dirname(self.app_dir)
