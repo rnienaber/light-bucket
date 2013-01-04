@@ -4,6 +4,8 @@ from jinja2 import Environment
 _par_re = re.compile(r'\n{2,}')
 
 def nl2p(text):
+  if not text:
+    return text
   result = u'\n'.join(u'<p>%s</p>' % p for p in _par_re.split(text))
   print 'RESULT: ' + result
   return result
