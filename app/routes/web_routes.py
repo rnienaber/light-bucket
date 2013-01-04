@@ -9,24 +9,27 @@ from config import config
 from models.year import Year
 from models.month import Month
 from models.album import Album
+from app.filters import nl2p
+
+settings = {'filters': {'nl2p': nl2p}}
 
 @route('/')
-@view('index')
+@view('index', template_settings=settings)
 def index():
   return {'summary': get_summary(config.photo_dir)}
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
-@view('album')
+@view('album', template_settings=settings)
 def album(year, month, album):
   return Album(year, month, album).to_view_data()
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>')
-@view('month')  
+@view('month', template_settings=settings)  
 def month(year, month):
   return Month(year, month).to_view_data()
   
 @route('/<year:re:\d{4}>')
-@view('year')  
+@view('year', template_settings=settings)  
 def year(year):
   return Year(year).to_view_data()
 

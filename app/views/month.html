@@ -11,7 +11,7 @@
 
     <div class="box col4 navigation">
         <h1>{{year}} - {{month_name}}</h1>
-        <p>{{summary['summary']}}</p>
+        <div>{{summary['summary'] | nl2p}}</div>
         <p>See more photos from <a href="./">{{year}}</a></p>
     </div>
 
