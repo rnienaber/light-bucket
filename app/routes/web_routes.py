@@ -6,6 +6,7 @@ from utils import get_summary
 #placeholder for config that is assigned on startup
 from config import config
 
+from models.index import Index
 from models.year import Year
 from models.month import Month
 from models.album import Album
@@ -16,7 +17,7 @@ settings = {'filters': {'nl2p': nl2p}}
 @route('/')
 @view('index', template_settings=settings)
 def index():
-  return {'summary': get_summary(config.photo_dir)}
+  return Index().to_view_data()
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
 @view('album', template_settings=settings)

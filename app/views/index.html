@@ -2,11 +2,42 @@
 {% block title %} - Welcome{% endblock %}
 
 {% block content %}
-<div id="gallery" class="row">
-
-    <div class="box navigation">
-        <h1>Welcome to Photo Gallery</h1>
-        <p>This needs to be updated with some a little bit more snazzy looking</p>
+<div  class="row">
+    <div class="box col4 navigation">
+        <h1>Recent Albums</h1>
     </div>
+    <div class="box col4"></div>
+    <div class="box col4"></div>
 </div>
+
+<div class="row">
+    <div class="box col4 navigation">
+        <h1>Years</h1>
+    </div>
+
+    {% for item in years -%}
+        <div class="box col4">
+            <a href="{{item.view_data.url}}">
+                {% if item.view_data.summary['cover-image'] is defined %}
+                <img src="/photos/{{item.view_data.url}}/{{item.view_data.summary['cover-image']}}">
+                {% else %}
+                <img src="{{item.first_month_image_url}}">
+                {% endif %}
+              </a>
+            <a href="/{{item.view_data.year}}">{{item.view_data.year}}</a>
+            <p>{{item.view_data.summary['summary']}}</p>
+        </div>
+    {% endfor -%}
+
+</div>
+
+<div id="gallery" class="row">
+    <div class="box col4 navigation">
+        <h1>Favourite Photos</h1>
+    </div>
+    <div class="box col4"></div>
+    <div class="box col4"></div>
+    <div class="box col4"></div>
+</div>
+
 {% endblock %}
