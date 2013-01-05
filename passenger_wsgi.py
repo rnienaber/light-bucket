@@ -12,7 +12,6 @@ from config import config
 bottle.TEMPLATE_PATH.insert(0, config.template_path)
 
 from app.routes import api_routes, web_routes
-from app.middleware import RemoveTrailingSlashesMiddleware
 from app.plugins import StripSlashesPlugin
 
 import logging
@@ -20,7 +19,6 @@ logfilename = os.path.join(cwd, 'log', 'passenger_wsgi.log')
 logging.basicConfig(filename=logfilename, level=logging.DEBUG)
 logging.info("Running %s", sys.executable)
 config.logging = logging 
-
 
 def bottle_app():
   app = bottle.default_app()
@@ -35,4 +33,4 @@ def application(environ, start_response):
     return []
 
 if __name__ == "__main__":
-  bottle.run(app=bottle_app(), reloader=True, debug=True) 
+  bottle.run(app=bottle_app(), server='cherrypy', reloader=True, debug=True) 
