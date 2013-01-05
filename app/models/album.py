@@ -33,7 +33,7 @@ class Album(object):
     
   def get_summary(self):
     return get_summary(self.album_dir)
-    
+
   def get_image_url(self, image_name):
     return '{0}{1}/{2}'.format(config.photo_url_path, self.url_path, image_name)
     
@@ -47,6 +47,7 @@ class Album(object):
 
     return {'photos': photos,
             'year': self.year,
-            'month': calendar.month_name[int(self.month)],
+            'month_name': calendar.month_name[int(self.month)],
+            'month': self.month,
             'album': self.title,
             'summary': self.get_summary()}
