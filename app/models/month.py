@@ -19,7 +19,7 @@ class Month(object):
     return get_summary(self.month_dir)
     
   def get_albums(self):
-    for e in os.walk(self.month_dir).next()[1]:
+    for e in sorted(os.walk(self.month_dir).next()[1]):
       yield Album(self.year, self.month, e)
       
   def first_image_url(self):

@@ -13,7 +13,7 @@ class Year(object):
     self.year_dir = os.path.join(config.photo_dir, year)
 
   def months(self):
-    for m in os.walk(self.year_dir).next()[1]:
+    for m in sorted(os.walk(self.year_dir).next()[1]):
       yield Month(self.year, m)
 
   def to_view_data(self):

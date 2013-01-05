@@ -29,7 +29,6 @@ def month(year, month):
 @route('/<year:re:\d{4}>')
 @view('year')  
 def year(year):
-  print Year(year).to_view_data()
   return Year(year).to_view_data()
 
 @route('/<filepath:path>')
