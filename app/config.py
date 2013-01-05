@@ -19,6 +19,8 @@ class Config(object):
 
     self.exiftool_path = path.join(self.lib_dir, 'exiftool')
     self.exiftool_script_path = path.join(self.exiftool_path, 'exiftool.pl')
+    
+    self.metadata_cache_file_name = 'metadata.cache'
 
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':

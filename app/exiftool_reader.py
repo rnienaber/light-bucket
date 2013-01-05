@@ -12,7 +12,7 @@ class ExifToolReader(object):
   def get_exifs(self, relative_image_paths, tag_list=None):
     if not isinstance(relative_image_paths, list):
       relative_image_paths = [relative_image_paths]
-
+    
     file_paths = [get_photo_path(self.config.photo_dir, f) for f in relative_image_paths]
 
     tags = normalize_tags(tag_list)

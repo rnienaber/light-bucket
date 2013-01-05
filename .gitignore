@@ -1,3 +1,4 @@
 *.pyc
 *.log
 public/photos/*
+metadata.cache

@@ -2,7 +2,6 @@ import os, re
 import bottle
 import yaml
 
-from app.filters import nl2p
 from bottle import jinja2_view
 
 def get_all_files(file):

@@ -2,7 +2,6 @@ import os
 from bottle import route, static_file
 
 from utils import get_summary, view
-#placeholder for config that is assigned on startup
 from config import config
 
 from models.index import Index

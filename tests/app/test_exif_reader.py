@@ -1,14 +1,12 @@
 import os
 import unittest2
-from config import Config
+from config import config
 from exiftool_reader import ExifToolReader
 
-test_config = Config()
-test_config.photo_dir = os.path.join(os.path.dirname(__file__), 'images')
 required_image_tags = ['latitude', 'longitude', 'comment', 'keywords',
                        'title', 'date', 'make', 'model', 'subject']
 
-reader = ExifToolReader(test_config)
+reader = ExifToolReader(config)
 
 class TestExifReader(unittest2.TestCase):
     def test_should_throw_an_error_if_file_doesnt_exist(self):
