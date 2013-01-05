@@ -79,6 +79,10 @@ body {
     float: left;
 }
 
+.gallery-container .box{
+    min-height: 250px;
+}
+
 .box h1{
     font-family: 'Grand Hotel', cursive, Arial;
     font-weight: normal;
