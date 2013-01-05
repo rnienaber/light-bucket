@@ -51,6 +51,10 @@ body {
     font-size: 11px;
 }
 
+.box a{
+    font-weight: bold;
+}
+
 .box.col4 {
     width: 260px;
 }
@@ -73,6 +77,21 @@ body {
 .gallery-container {
     width: 900px;
     float: left;
+}
+
+.gallery-container .box{
+    min-height: 250px;
+}
+
+.box h1{
+    font-family: 'Grand Hotel', cursive, Arial;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 30px;
+    margin-top: 0;
+    /*border-bottom: 1px solid #c9c9c9;*/
+    text-align: center;
+    text-transform: capitalize;
 }
 
 .navigation {

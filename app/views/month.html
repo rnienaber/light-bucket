@@ -2,7 +2,8 @@
 {% block title %} - {{year}} - {{month_name}}{% endblock %}
 
 {% block breadcrumb %}
-    <li><a href="./">{{year}}</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/{{year}}">{{year}}</a></li>
     <li class="active"><a href="">{{month_name}}</a></li>
 {% endblock %}
 
@@ -12,7 +13,7 @@
     <div class="box col4 navigation">
         <h1>{{year}} - {{month_name}}</h1>
         <div>{{summary['summary'] | nl2p}}</div>
-        <p>See more photos from <a href="./">{{year}}</a></p>
+        <p>See more photos from <a href="/{{year}}">{{year}}</a></p>
     </div>
 
     {% for item in albums -%}
@@ -24,7 +25,7 @@
         <img src="{{item.first_image_url}}">
         {% endif %}
       </a>
-      <p><strong><a href="{{item.url}}">{{item.title}}</a></strong></p>
+      <p><a href="{{item.url}}">{{item.title}}</a></p>
       <p>{{item.summary['summary']}}</p>
     </div>
     {% endfor -%}

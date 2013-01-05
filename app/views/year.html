@@ -2,6 +2,7 @@
 {% block title %} - {{year}}{% endblock %}
 
 {% block breadcrumb %}
+    <li><a href="/">Home</a></li>
     <li class="active"><a href="">{{year}}</a></li>
 {% endblock %}
 
@@ -25,7 +26,7 @@
             <img src="{{item.first_image_url}}">
             {% endif %}
           </a>
-          <p><strong><a href="{{item.url}}">{{item.month}}</a></strong></p>
+          <p><a href="{{item.url}}">{{item.month}}</a></p>
           <p>{{item.summary['summary']}}</p>
         </div>
         {% endfor -%}
