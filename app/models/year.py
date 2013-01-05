@@ -17,13 +17,13 @@ class Year(object):
       yield Month(self.year, m)
 
   def to_view_data(self):
-    months = []
-    for m in months:
-      months.append({'month': m.name,
+    months_result = []
+    for m in self.months():
+        months_result.append({'month': m.name,
                      'url': m.url_path,
                      'summary': m.get_summary(),
                      'first_image_url': m.first_image_url()})
 
-    return {'months': months,
+    return {'months': months_result,
             'year': self.year,
             'summary': get_summary(self.year_dir)}
