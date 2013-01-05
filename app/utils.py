@@ -1,6 +1,9 @@
-import os
+import os, re
 import bottle
 import yaml
+
+from app.filters import nl2p
+from bottle import jinja2_view
 
 def get_all_files(file):
   cur_dir = os.path.dirname(file)
@@ -20,3 +23,20 @@ def first(iterable, default=None):
     for i in iterable:
       return i
   return default
+  
+_par_re = re.compile(r'\n{2,}')
+def nl2p(text):
+  if not text:
+    return text
+  result = u'\n'.join(u'<p>%s</p>' % p for p in _par_re.split(text))
+  return result
+  
+def view(argument, **defaults):
+  template_settings = defaults.get('template_settings')
+  if type(template_settings) != dict:
+    template_settings = {}
+    defaults['template_settings'] = template_settings
+    
+  template_settings.update({'filters': {'nl2p': nl2p}})
+  return jinja2_view(argument, **defaults)
+
