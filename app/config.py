@@ -8,6 +8,7 @@ class Config(object):
   def __init__(self):
     #url paths
     self.photo_url_path = '/photos'
+    self.thumbnail_url_path = '/thumbnails'
     
     #disk paths
     self.app_dir = path.abspath(path.dirname(__file__))

@@ -42,6 +42,12 @@ class TestAlbum(unittest2.TestCase):
   def test_first_image_url(self):
     self.assertEqual(self.album.first_image_url(), '/photos/2001/02/canoe_the_wye/IMG_3277.jpg')
 
+  def test_get_image_url(self):
+    self.assertEqual(self.album.get_image_url('IMG_3277.jpg'), '/photos/2001/02/canoe_the_wye/IMG_3277.jpg')
+
+  def test_get_thumbnail_url(self):
+    self.assertEqual(self.album.get_thumbnail_url('IMG_3277.jpg'), '/thumbnails/2001/02/canoe_the_wye/IMG_3277.jpg')
+  
   def test_read_image_data(self):
     expected = ('image/jpeg', 800, 533)
     self.assertItemsEqual(self.album.read_image_data('IMG_3277.jpg'), expected)
