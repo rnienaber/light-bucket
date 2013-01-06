@@ -1,7 +1,8 @@
-import os
+import os, sys
 import unittest2
 import simplejson as json
-from models.album import Album
+
+from app.models.album import Album
 
 from config import config
 
@@ -93,5 +94,3 @@ class TestAlbum(unittest2.TestCase):
       self.assertEquals(self.album.get_exif_data(), expected)
     finally:
       delete_file(cache_path)
-    
-    
