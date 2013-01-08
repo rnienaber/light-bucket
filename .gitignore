@@ -1,4 +1,6 @@
 *.pyc
 *.log
 public/photos/*
+public/thumbnails/*
 metadata.cache
+tests/images/thumbnails

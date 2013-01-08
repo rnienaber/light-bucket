@@ -15,6 +15,7 @@ class Config(object):
     self.template_path = './app/views'
     self.root_dir = path.dirname(self.app_dir)
     self.public_dir = path.join(self.root_dir, 'public')
+    self.thumbnail_dir = path.join(self.public_dir, 'thumbnails')
     self.photo_dir = path.join(self.public_dir, 'photos')
     self.lib_dir = path.join(self.root_dir, 'lib')
 
@@ -22,6 +23,7 @@ class Config(object):
     self.exiftool_script_path = path.join(self.exiftool_path, 'exiftool.pl')
     
     self.metadata_cache_file_name = 'metadata.cache'
+    self.thumbnail_size = (200, 200)
 
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':
