@@ -24,7 +24,7 @@ class Month(object):
       
   def first_image_url(self):
     album = first(self.get_albums())
-    return album.first_image_url() if album else ''
+    return album.get_thumbnail_url() if album else ''
     
   def to_view_data(self):
     albums = []

@@ -25,7 +25,6 @@ def error_handler(error):
   message = " %sURL: %s" % (error.traceback, bottle.request.url)
   logging.exception(message)
 
-
 def bottle_app():
   app = bottle.default_app()
   app.install(StripSlashesPlugin())
@@ -40,4 +39,5 @@ def application(environ, start_response):
     return []
 
 if __name__ == "__main__":
-  bottle.run(app=bottle_app(), server='cherrypy', reloader=True, debug=True) 
+  config.debug = True
+  bottle.run(app=bottle_app(), server='cherrypy', reloader=True, debug=config.debug) 
