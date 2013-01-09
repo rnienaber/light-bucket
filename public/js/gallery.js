@@ -1,18 +1,19 @@
 var loadImageData = function () {
     var url = document.URL;
-    var path = url.match(/\d{4}\/\d{2}\/\w+/g)[0];
-    console.log(path);
-
-    $.ajax({
-        url: '/api/photo_metadata?path=' + path,
-        success: function (data) {
-            applyImageData(data);
-            var $gallery = $('#gallery');
-            $gallery.imagesLoaded(function () {
-                $gallery.masonry({itemSelector: '.box'});
+    var path = url.match(/\d{4}\/\d{2}\/\w*/g);
+    if(path != null){
+        path = path[0];
+        $.ajax({
+            url: '/api/photo_metadata?path=' + path,
+                success: function (data) {
+                    applyImageData(data);
+                    var $gallery = $('#gallery');
+                    $gallery.imagesLoaded(function () {
+                        $gallery.masonry({itemSelector: '.box'});
+                    });
+                }
             });
-        }
-    });
+    }
 };
 
 var applyImageData = function (data) {
