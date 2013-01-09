@@ -35,7 +35,7 @@ class Album(object):
         
   def first_image_url(self):
     image_name = first(self.graphic_files())
-    return self.get_image_url(image_name) if image_name else ''
+    return self.get_thumbnail_url(image_name) if image_name else ''
 
   def read_image_data(self, image_name):
     with open(os.path.join(self.album_dir, image_name), 'rb') as photo_file:
@@ -79,7 +79,7 @@ class Album(object):
     for p in self.graphic_files():
       content_type, width, height = self.read_image_data(p)
 
-      photos.append({'photo': self.get_image_url(p),
+      photos.append({'photo': self.get_thumbnail_url(p),
                      'thumbnail': self.get_thumbnail_url(p),
                      'width': width, 'height': height})
 
