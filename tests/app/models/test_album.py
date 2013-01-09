@@ -36,11 +36,11 @@ class TestAlbum(unittest2.TestCase):
     self.assertEqual(album.album_dir, os.path.join('images', '2001', '02', 'canoe_the_wye')) 
 
   def test_list_graphic_files(self):
-    expected = ['IMG_3277.jpg', 'IMG_6868.jpg', 'wilderness-01.jpg']
+    expected = ['IMG_3277.jpg', 'IMG_6868.jpg', 'wilderness-01.jpg', 'boris-1.jpg']
     self.assertItemsEqual(list(self.album.graphic_files()), expected)
     
   def test_first_image_url(self):
-    self.assertEqual(self.album.first_image_url(), '/photos/2001/02/canoe_the_wye/IMG_3277.jpg')
+    self.assertEqual(self.album.first_image_url(), '/thumbnails/2001/02/canoe_the_wye/boris-1.jpg')
 
   def test_get_image_url(self):
     self.assertEqual(self.album.get_image_url('IMG_3277.jpg'), '/photos/2001/02/canoe_the_wye/IMG_3277.jpg')
@@ -63,17 +63,18 @@ class TestAlbum(unittest2.TestCase):
     delete_file(cache_path)
     
     expected = {'IMG_3277.jpg': 'data', 
-                'IMG_6868.jpg': 'data', 
+                'IMG_6868.jpg': 'data',
+                'boris-1.jpg' : 'data',
                 'wilderness-01.jpg': 'data'}
     json_expected = json.dumps(expected)
     
-    expected_paths = ['2001\\02\\canoe_the_wye\\IMG_3277.jpg', 
+    expected_paths = ['2001\\02\\canoe_the_wye\\boris-1.jpg',
+                      '2001\\02\\canoe_the_wye\\IMG_3277.jpg', 
                       '2001\\02\\canoe_the_wye\\IMG_6868.jpg', 
                       '2001\\02\\canoe_the_wye\\wilderness-01.jpg']    
     
     def dummy_run_exiftool(relative_paths):
-      if relative_paths != expected_paths:
-        raise Exception, 'Unexpected input: ' + str(relative_paths)
+      self.assertItemsEqual(relative_paths, expected_paths)
       return expected
     
     self.album.run_exiftool = dummy_run_exiftool    

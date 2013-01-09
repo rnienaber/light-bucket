@@ -28,6 +28,13 @@ class Thumbnail(object):
         if tail:
             os.mkdir(newdir)
   
+  def resize(self, photo_path, thumbnail_path):
+    im = Image.open(photo_path)
+    wpercent = (config.thumbnail_size/float(im.size[0]))
+    hsize = int((float(im.size[1])*float(wpercent)))
+    im.thumbnail((config.thumbnail_size, hsize), Image.ANTIALIAS)
+    im.save(thumbnail_path, "JPEG")
+  
   def get_path(self):
     thumbnail_path = os.path.abspath(self.location())
     photo_path = os.path.abspath(self.photo_path())
@@ -39,9 +46,7 @@ class Thumbnail(object):
     else:
       self.mkdirs(os.path.dirname(thumbnail_path))
     
-    im = Image.open(photo_path)
-    im.thumbnail(config.thumbnail_size, Image.ANTIALIAS)
-    im.save(thumbnail_path, "JPEG")
+    self.resize(photo_path, thumbnail_path)
     
     return thumbnail_path
     

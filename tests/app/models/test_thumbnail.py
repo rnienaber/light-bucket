@@ -82,4 +82,15 @@ class TestThumbnail(unittest2.TestCase):
     thumbnail = Thumbnail('/wilderness-01.jpg')
     thumbnail_path = thumbnail.get_path()
 
+  def test_should_only_resize_on_width(self):
+    photo_path = os.path.join(config.photo_dir, 'boris-1.jpg')
+    thumbnail_path = os.path.join(config.thumbnail_dir, 'boris-1.jpg')
+    shutil.copy2(photo_path, thumbnail_path)
+    
+    thumbnail = Thumbnail('/boris-1.jpg')
+    thumbnail_path = thumbnail.get_path()
+    
+    with open(thumbnail_path, 'rb') as photo_file:
+      data = photo_file.read(81000)
 
+    self.assertEquals(getImageInfo(data), ('image/jpeg', 300, 400))

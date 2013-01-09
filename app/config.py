@@ -25,7 +25,7 @@ class Config(object):
     self.exiftool_script_path = path.join(self.exiftool_path, 'exiftool.pl')
     
     self.metadata_cache_file_name = 'metadata.cache'
-    self.thumbnail_size = (300, 300)
+    self.thumbnail_size = 300
 
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':

@@ -14,5 +14,5 @@ config.thumbnail_dir = os.path.join(config.photo_dir, 'thumbnails')
 
 if __name__ == "__main__":
     loader = unittest.TestLoader()
-    all_tests = loader.discover('./app/models', pattern='*.py')
+    all_tests = loader.discover('./app', pattern='*.py')
     unittest.TextTestRunner().run(all_tests)
