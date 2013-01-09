@@ -6,14 +6,18 @@ from subprocess import PIPE
 
 class Config(object):
   def __init__(self):
+    self.debug = False
+    
     #url paths
     self.photo_url_path = '/photos'
+    self.thumbnail_url_path = '/thumbnails'
     
     #disk paths
     self.app_dir = path.abspath(path.dirname(__file__))
     self.template_path = './app/views'
     self.root_dir = path.dirname(self.app_dir)
     self.public_dir = path.join(self.root_dir, 'public')
+    self.thumbnail_dir = path.join(self.public_dir, 'thumbnails')
     self.photo_dir = path.join(self.public_dir, 'photos')
     self.lib_dir = path.join(self.root_dir, 'lib')
 
@@ -21,6 +25,7 @@ class Config(object):
     self.exiftool_script_path = path.join(self.exiftool_path, 'exiftool.pl')
     
     self.metadata_cache_file_name = 'metadata.cache'
+    self.thumbnail_size = (300, 300)
 
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':

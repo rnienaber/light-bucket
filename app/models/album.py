@@ -35,7 +35,7 @@ class Album(object):
         
   def first_image_url(self):
     image_name = first(self.graphic_files())
-    return self.get_image_url(image_name) if image_name else ''
+    return self.get_thumbnail_url(image_name) if image_name else ''
 
   def read_image_data(self, image_name):
     with open(os.path.join(self.album_dir, image_name), 'rb') as photo_file:
@@ -48,6 +48,9 @@ class Album(object):
 
   def get_image_url(self, image_name):
     return '{0}{1}/{2}'.format(config.photo_url_path, self.url_path, image_name)
+    
+  def get_thumbnail_url(self, image_name):
+    return '{0}{1}/{2}'.format(config.thumbnail_url_path, self.url_path, image_name)
     
   def get_exif_data(self):
     cache_path = os.path.join(self.album_dir, config.metadata_cache_file_name)
@@ -77,6 +80,7 @@ class Album(object):
       content_type, width, height = self.read_image_data(p)
 
       photos.append({'photo': self.get_image_url(p),
+                     'thumbnail': self.get_thumbnail_url(p),
                      'width': width, 'height': height})
 
     return {'photos': photos,
