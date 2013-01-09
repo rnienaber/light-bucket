@@ -79,7 +79,7 @@ class Album(object):
     for p in self.graphic_files():
       content_type, width, height = self.read_image_data(p)
 
-      photos.append({'photo': self.get_thumbnail_url(p),
+      photos.append({'photo': self.get_image_url(p),
                      'thumbnail': self.get_thumbnail_url(p),
                      'width': width, 'height': height})
 
