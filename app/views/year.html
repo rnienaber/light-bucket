@@ -21,7 +21,7 @@
         <div class="box col4">
           <a href="{{item.url}}">
             {% if item.summary['cover-image'] is defined %}
-            <img src="/photos/{{item.url}}/{{item.summary['cover-image']}}">
+            <img src="/thumbnails{{item.url}}/{{item.summary['cover-image']}}">
             {% else %}
             <img src="{{item.first_image_url}}">
             {% endif %}
