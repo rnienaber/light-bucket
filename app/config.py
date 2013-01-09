@@ -6,6 +6,8 @@ from subprocess import PIPE
 
 class Config(object):
   def __init__(self):
+    self.debug = False
+    
     #url paths
     self.photo_url_path = '/photos'
     self.thumbnail_url_path = '/thumbnails'

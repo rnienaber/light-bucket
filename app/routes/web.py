@@ -1,5 +1,5 @@
 import os
-from bottle import route, static_file
+from bottle import route, static_file, request, redirect
 
 from utils import get_summary, view
 from config import config
@@ -9,7 +9,6 @@ from models.year import Year
 from models.month import Month
 from models.album import Album
 from models.thumbnail import Thumbnail
-
 
 @route('/')
 @view('index')
@@ -34,7 +33,11 @@ def year(year):
 @route(config.thumbnail_url_path + '/<filepath:path>')
 def service_thumbnail(filepath):
   thumbnail = Thumbnail(filepath)
-  return static_file(thumbnail.get_path(), None)
+  thumbnail_path = thumbnail.get_path()
+  if config.debug:
+    return static_file(thumbnail.get_path(), None)
+  else:
+    redirect(request.url, 302) #thumbnail has been created, let apache serve
 
 @route('/<filepath:path>')
 def serve_static(filepath):
