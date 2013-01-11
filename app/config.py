@@ -5,6 +5,7 @@ import subprocess
 from subprocess import PIPE
 from datetime import timedelta
 
+import yaml
 from bottle import request
 
 class Config(object):
@@ -15,6 +16,7 @@ class Config(object):
     self.photo_url_path = '/photos'
     self.thumbnail_url_path = '/thumbnails'
     self.admin_auth_url_path = '/admin/authenticated'
+    self.admin_show_token_url_path = '/admin/show_token'
     self.landing_page = '/'
     
     #disk paths
@@ -34,6 +36,12 @@ class Config(object):
     self.auth_cookie_timeout = timedelta(14) #2 weeks
     self.auth_cookie_name = '.photo-auth'
 
+    #load users
+    self.users_file_path = os.path.join(self.root_dir, 'users.yaml')
+    if os.path.exists(self.users_file_path):
+      with open(self.users_file_path, 'r') as users_file:
+        self.users = yaml.load(users_file)
+    
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':
       if os.path.exists(r'C:\Perl64'):

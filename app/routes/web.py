@@ -17,6 +17,13 @@ def index():
   data = Index().to_view_data()
   data['cookie'] = auth.get_auth_cookie(request)
   return data
+
+@route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>/edit')
+@view('album_edit')
+def album_edit(year, month, album):
+  if not auth.is_authenticated(request):
+    redirect(request.url[0:-5])
+  return Album(year, month, album).to_view_data()
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
 @view('album')

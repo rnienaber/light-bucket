@@ -5,16 +5,14 @@
     <li><a href="/">Home</a></li>
     <li><a href="/{{year}}">{{year}}</a></li>
     <li><a href="/{{year}}/{{month}}">{{month}}</a></li>
-    <li class="active"><a href="">{{album}}</a></li>
-	{% if user is authenticated %}
-	<li><a href="/{{year}}/{{month}}/{{name}}/edit">Edit</a></li>
-	{% endif %}
+    <li><a href="/{{year}}/{{month}}/{{name}}">{{album}}</a></li>
+	<li class="active"><a href="">Edit</a></li>
 {% endblock %}
 
 {% block content %}
 <div id="gallery" class="row">
 
-    <div class="box navigation">
+    <div class="navigation">
         <h1>{{year}} - {{month_name}} - {{album}}</h1>
         <div>{{summary['summary'] | nl2p}}</div>
         <p>See more photos from <a href="/{{year}}/{{month}}">{{month_name}}</a></p>
@@ -22,9 +20,14 @@
 
     {% for item in photos -%}
 
-    <div class="box photo-box">
-        <a class="fancybox" rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
-        <p class="date right"></p>
+    <div class="photo-box">
+        <a rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
+        <p>Comment: <input /></p>
+		<p>Keywords: <input /></p>
+		<p>Title: <input /></p>
+		<p>Subject: <input /></p>
+		<p>PersonInImage: <input /></p>
+		<input type='submit' />
     </div>
     {% endfor -%}
 </div>

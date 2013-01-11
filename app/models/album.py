@@ -88,6 +88,7 @@ class Album(object):
             'month_name': calendar.month_name[int(self.month)],
             'month': self.month,
             'album': self.title,
+            'name': self.name,
             'summary': self.get_summary()}
             
   def run_exiftool(self, image_relative_paths):
