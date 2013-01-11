@@ -9,11 +9,14 @@ from models.year import Year
 from models.month import Month
 from models.album import Album
 from models.thumbnail import Thumbnail
+from app import auth
 
 @route('/')
 @view('index')
 def index():
-  return Index().to_view_data()
+  data = Index().to_view_data()
+  data['cookie'] = auth.get_auth_cookie(request)
+  return data
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
 @view('album')

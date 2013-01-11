@@ -4,3 +4,4 @@ public/photos/*
 public/thumbnails/*
 metadata.cache
 tests/images/thumbnails
+users.yaml

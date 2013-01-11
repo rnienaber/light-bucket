@@ -3,6 +3,9 @@ from os import path
 import platform
 import subprocess
 from subprocess import PIPE
+from datetime import timedelta
+
+from bottle import request
 
 class Config(object):
   def __init__(self):
@@ -11,6 +14,8 @@ class Config(object):
     #url paths
     self.photo_url_path = '/photos'
     self.thumbnail_url_path = '/thumbnails'
+    self.admin_auth_url_path = '/admin/authenticated'
+    self.landing_page = '/'
     
     #disk paths
     self.app_dir = path.abspath(path.dirname(__file__))
@@ -26,6 +31,8 @@ class Config(object):
     
     self.metadata_cache_file_name = 'metadata.cache'
     self.thumbnail_size = 300
+    self.auth_cookie_timeout = timedelta(14) #2 weeks
+    self.auth_cookie_name = '.photo-auth'
 
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':
@@ -43,5 +50,9 @@ class Config(object):
       
     if not os.path.exists(self.perl_executable_path):
       raise Exception('Perl interpreter could not be found')
+
+  @property
+  def auth_cookie_secret(self):
+    return request.environ.get('COOKIE_SECRET_KEY')
       
 config = Config()

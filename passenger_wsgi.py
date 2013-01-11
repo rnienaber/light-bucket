@@ -11,7 +11,7 @@ import bottle
 from config import config
 bottle.TEMPLATE_PATH.insert(0, config.template_path)
 
-from app.routes import api, web
+from app.routes import api, web, admin
 from app.plugins import StripSlashesPlugin
 
 import logging
