@@ -1,18 +1,20 @@
 var loadImageData = function () {
-	if (document.URL.match(/\d{4}\/\d{2}\/\w*/g) == null)
+    var url = document.URL;
+    var path = url.match(/\/\d{4}\/\d{2}\/\w*/g);
+    if(path == null)
 		return
-	
-	$.ajax({
-		url: document.URL + '/metadata',
-			success: function (data) {
+
+	url = path[0] + '/metadata'
+	var success = function (data) {
 				applyImageData(data);
 				var $gallery = $('#gallery');
 				$gallery.imagesLoaded(function () {
 					$gallery.masonry({itemSelector: '.box'});
 				});
 			}
-		});
-
+	
+	$.get(url, success)
+	
 };
 
 var applyImageData = function (data) {
@@ -47,6 +49,15 @@ var getDateForDisplay = function (date) {
     return date.getDate() + result + " at "+date.toTimeString().substr(0,5);
 };
 
+function update_exif(event) {
+	event.preventDefault();
+	form = $(this).parent('form')
+	
+	$.post(form.data('update-url'), form.serialize());
+	
+	return false;
+}
+
 $(document).ready(function () {
     loadImageData();
     var $gallery = $('#gallery');
@@ -54,6 +65,9 @@ $(document).ready(function () {
         $gallery.masonry({itemSelector: '.box'});
     });
     $(".fancybox").fancybox({helpers: {title: {type: 'inside'}}});
+	
+	$(".update-exif input:submit").click(update_exif);
+	
 });
 
 //$gallery.imagesLoaded(function(){

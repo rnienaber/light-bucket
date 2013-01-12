@@ -21,13 +21,15 @@
     {% for item in photos -%}
 
     <div class="photo-box">
-        <a rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
-        <p>Comment: <input /></p>
-		<p>Keywords: <input /></p>
-		<p>Title: <input /></p>
-		<p>Subject: <input /></p>
-		<p>PersonInImage: <input /></p>
-		<input type='submit' />
+		<form action="#" class='update-exif' data-update-url='{{item.photo}}/update'>
+			<a rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
+			<p>Comment: <input name='comment' /></p>
+			<p>Keywords: <input name='keywords' /></p>
+			<p>Title: <input name='title' /></p>
+			<p>Subject: <input name='subject' /></p>
+			<p>PersonInImage: <input name='person_in_image' /></p>
+			<input type='submit' />
+		</form>
     </div>
     {% endfor -%}
 </div>
