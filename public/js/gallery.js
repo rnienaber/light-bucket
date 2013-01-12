@@ -1,19 +1,18 @@
 var loadImageData = function () {
-    var url = document.URL;
-    var path = url.match(/\d{4}\/\d{2}\/\w*/g);
-    if(path != null){
-        path = path[0];
-        $.ajax({
-            url: '/api/photo_metadata?path=' + path,
-                success: function (data) {
-                    applyImageData(data);
-                    var $gallery = $('#gallery');
-                    $gallery.imagesLoaded(function () {
-                        $gallery.masonry({itemSelector: '.box'});
-                    });
-                }
-            });
-    }
+	if (document.URL.match(/\d{4}\/\d{2}\/\w*/g) == null)
+		return
+	
+	$.ajax({
+		url: document.URL + '/metadata',
+			success: function (data) {
+				applyImageData(data);
+				var $gallery = $('#gallery');
+				$gallery.imagesLoaded(function () {
+					$gallery.masonry({itemSelector: '.box'});
+				});
+			}
+		});
+
 };
 
 var applyImageData = function (data) {
@@ -57,18 +56,6 @@ $(document).ready(function () {
     $(".fancybox").fancybox({helpers: {title: {type: 'inside'}}});
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
 //$gallery.imagesLoaded(function(){
 //    $gallery.masonry({
 //    itemSelector : '.box'
@@ -77,6 +64,3 @@ $(document).ready(function () {
 ////        columnWidth: 400 // 3 columns
 //  });
 //});
-
-
-

@@ -8,10 +8,10 @@ from models.album import Album
 import exiftool_reader as reader
 from app import auth
 
-@route('/api/photo_metadata')
-def photo_metadata():
+@route('/<album_path:path>/metadata')
+def photo_metadata(album_path):
+  album = Album(path=album_path)
   response.content_type = 'application/json'
-  album = Album(path=request.query.path)
   return album.get_exif_data()
 
 @post(config.photo_url_path + '/<image_path:path>/update')  
