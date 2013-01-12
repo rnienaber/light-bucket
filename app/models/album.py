@@ -5,7 +5,7 @@ from getimageinfo import getImageInfo
 
 from config import config
 from utils import get_summary, first
-from exiftool_reader import ExifToolReader
+import exiftool_reader as reader
 
 path_regex = re.compile("(?P<year>\d{4})/(?P<month>\d+)/(?P<name>.*)")
 
@@ -92,5 +92,5 @@ class Album(object):
             'summary': self.get_summary()}
             
   def run_exiftool(self, image_relative_paths):
-    return ExifToolReader(config).get_exifs(image_relative_paths)
+    return reader.get_exifs(image_relative_paths)
     
