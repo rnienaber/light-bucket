@@ -1,5 +1,5 @@
 import os
-from bottle import route, static_file, request, redirect
+from bottle import route, static_file, request, redirect, HTTPError
 
 from utils import get_summary, view
 from config import config
@@ -22,7 +22,7 @@ def index():
 @view('album_edit')
 def album_edit(year, month, album):
   if not auth.is_authenticated(request):
-    redirect(request.url[0:-5])
+    return HTTPError(404, "File does not exist.")
   return Album(year, month, album).to_view_data()
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')
