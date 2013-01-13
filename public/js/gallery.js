@@ -36,6 +36,17 @@ var applyImageData = function (data) {
             box.find(".person_in_image").text(peopleNames);
         }
     });
+
+    $('.photo-edit-box').each(function () {
+            var box = $(this);
+            var img = box.find('img').attr('src').match(/\d{4}\/\d{2}\/\w\S+/g)[0];
+
+            box.find(".title").val(data[img]['title']);
+            box.find(".comment").text(data[img]['comment']);
+            box.find(".subject").val(data[img]['subject']);
+            box.find(".keywords").val(data[img]['keywords']);
+            box.find(".person_in_image").val(data[img]['person_in_image']);
+        });
 };
 
 var getDateForDisplay = function (date) {
