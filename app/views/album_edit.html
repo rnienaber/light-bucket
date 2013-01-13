@@ -10,26 +10,51 @@
 {% endblock %}
 
 {% block content %}
-<div id="gallery" class="row">
-
-    <div class="navigation">
-        <h1>{{year}} - {{month_name}} - {{album}}</h1>
-        <div>{{summary['summary'] | nl2p}}</div>
-        <p>See more photos from <a href="/{{year}}/{{month}}">{{month_name}}</a></p>
-    </div>
+<div class="row">
 
     {% for item in photos -%}
+    <div class="box photo-edit-box">
 
-    <div class="photo-box">
-		<form action="#" class='update-exif' data-update-url='{{item.photo}}/update'>
-			<a rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
-			<p>Comment: <input name='comment' /></p>
-			<p>Keywords: <input name='keywords' /></p>
-			<p>Title: <input name='title' /></p>
-			<p>Subject: <input name='subject' /></p>
-			<p>PersonInImage: <input name='person_in_image' /></p>
-			<input type='submit' />
-		</form>
+        <div class="span7">
+            <a rel="group" href="{{item.photo}}"><img src="{{item.photo}}" alt=""></a>
+        </div>
+        <div class="span5">
+            <form action="#" class='update-exif form-horizontal' data-update-url='{{item.photo}}/update'>
+                <div class="control-group">
+                    <label for="comment" class="control-label">Comment</label>
+                    <div class="controls">
+                        <textarea rows=10 name='comment' id="comment"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="keywords" class="control-label">Keywords</label>
+                    <div class="controls">
+                        <input type="text" name='keywords' id="keywords"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="title" class="control-label">Title</label>
+                    <div class="controls">
+                        <input type="text" rows=3  name='title' id="title"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="subject" class="control-label">Subject</label>
+                    <div class="controls">
+                        <input type="text"  name='subject' id="subject"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="person_in_image" class="control-label">PersonInImage</label>
+                    <div class="controls">
+                        <input type="text"  name='person_in_image' id="person_in_image" />
+                    </div>
+                </div>
+                <div class="controls">
+                    <input type='submit' class="btn" value="Save"/>
+                </div>
+            </form>
+        </div>
     </div>
     {% endfor -%}
 </div>

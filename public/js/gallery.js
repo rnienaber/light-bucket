@@ -2,7 +2,7 @@ var loadImageData = function () {
     var url = document.URL;
     var path = url.match(/\/\d{4}\/\d{2}\/\w*/g);
     if(path == null)
-		return
+		return;
 
 	url = path[0] + '/metadata'
 	var success = function (data) {
@@ -11,7 +11,7 @@ var loadImageData = function () {
 				$gallery.imagesLoaded(function () {
 					$gallery.masonry({itemSelector: '.box'});
 				});
-			}
+			};
 	
 	$.get(url, success)
 	
@@ -51,7 +51,7 @@ var getDateForDisplay = function (date) {
 
 function update_exif(event) {
 	event.preventDefault();
-	form = $(this).parent('form')
+	form = $(this).parent('form');
 	
 	$.post(form.data('update-url'), form.serialize());
 	
