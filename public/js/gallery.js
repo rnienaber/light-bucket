@@ -6,12 +6,12 @@ var loadImageData = function () {
 
 	url = path[0] + '/metadata'
 	var success = function (data) {
-				applyImageData(data);
-				var $gallery = $('#gallery');
-				$gallery.imagesLoaded(function () {
-					$gallery.masonry({itemSelector: '.box'});
-				});
-			};
+        applyImageData(data);
+        var $gallery = $('#gallery');
+        $gallery.imagesLoaded(function () {
+            $gallery.masonry({itemSelector: '.box'});
+        });
+    };
 	
 	$.get(url, success)
 	
@@ -24,6 +24,17 @@ var applyImageData = function (data) {
 
         var date = new Date(data[img]['date']);
         box.find(".date").text(getDateForDisplay(date));
+        box.find(".title").text(data[img]['title']);
+        box.find(".comment").text(data[img]['comment']);
+        box.find(".subject").text(data[img]['subject']);
+        box.find(".keywords").text(data[img]['keywords']);
+
+        var person_in_image = data[img]['person_in_image'];
+        if(person_in_image != undefined){
+            var people = person_in_image.split(',');
+            var peopleNames = people.join(', ');
+            box.find(".person_in_image").text(peopleNames);
+        }
     });
 };
 
@@ -51,7 +62,7 @@ var getDateForDisplay = function (date) {
 
 function update_exif(event) {
 	event.preventDefault();
-	form = $(this).parent('form');
+	var form = $(this).parents('form');
 	
 	$.post(form.data('update-url'), form.serialize());
 	

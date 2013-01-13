@@ -22,8 +22,14 @@
 
     {% for item in photos -%}
 
+
     <div class="box photo-box">
         <a class="fancybox" rel="group" href="{{item.photo}}"><img src="{{item.thumbnail}}" alt=""></a>
+        <strong><p class="title"></p></strong>
+        <p class="subject"></p>
+        <p class="comment"></p>
+        <p class="person_in_image right"></p>
+        <p class="keywords" style="display:none"></p>
         <p class="date right"></p>
     </div>
     {% endfor -%}

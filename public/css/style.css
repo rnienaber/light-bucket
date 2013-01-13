@@ -71,6 +71,7 @@ body {
 .box .right{
     color: #8C7E7E;
     float: right;
+    text-transform: capitalize;
 }
 
 .navigation-container {
