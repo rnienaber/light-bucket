@@ -5,6 +5,7 @@ import yaml
 from bottle import jinja2_view, request
 
 from auth import is_authenticated
+from config import config
 
 def get_all_files(file):
   cur_dir = os.path.dirname(file)
@@ -43,4 +44,8 @@ def view(argument, **defaults):
     
   template_settings.update({'filters': {'nl2p': nl2p}, 
                             'tests': {'authenticated': authenticated}})
+                     
+  google_analytics_key = config.settings.get('google_analytics_key')
+  if google_analytics_key:
+    defaults['google_analytics_key'] = google_analytics_key
   return jinja2_view(argument, **defaults)

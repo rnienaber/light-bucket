@@ -35,13 +35,14 @@ class Config(object):
     self.thumbnail_size = 300
     self.auth_cookie_timeout = timedelta(14) #2 weeks
     self.auth_cookie_name = '.photo-auth'
-
-    #load users
-    self.users_file_path = os.path.join(self.root_dir, 'users.yaml')
-    if os.path.exists(self.users_file_path):
-      with open(self.users_file_path, 'r') as users_file:
-        self.users = yaml.load(users_file)
     
+    #load users
+    self.settings_file_path = os.path.join(self.root_dir, 'settings.yaml')
+    if os.path.exists(self.settings_file_path):
+      with open(self.settings_file_path, 'r') as settings_file:
+        self.settings = yaml.load(settings_file)
+        self.users = self.settings.get('users')
+
     #try and find perl interpreter for exiftool
     if platform.system() == 'Windows':
       if os.path.exists(r'C:\Perl64'):

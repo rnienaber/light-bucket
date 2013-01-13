@@ -17,7 +17,6 @@ def photo_metadata(album_path):
 def update_photo_metadata(image_path):
   if not auth.is_authenticated(request):
     return HTTPError(404, "File does not exist.")
-
   
   values = {}
   for k in request.forms.keys():
