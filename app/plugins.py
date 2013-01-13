@@ -6,5 +6,6 @@ class StripSlashesPlugin(object):
     def wrapper(*args, **kwargs):
       if request.path != '/' and request.path.endswith('/'):
         redirect(request.path.rstrip('/'), 301)
+      
       return callback(*args, **kwargs)
     return wrapper

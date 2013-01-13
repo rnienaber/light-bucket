@@ -52,8 +52,16 @@ class Album(object):
   def get_thumbnail_url(self, image_name):
     return '{0}{1}/{2}'.format(config.thumbnail_url_path, self.url_path, image_name)
     
+  def get_metadata_cache(self):
+    return os.path.join(self.album_dir, config.metadata_cache_file_name)
+    
+  def delete_metadata_cache(self):
+    cache_path = self.get_metadata_cache()
+    if os.path.exists(cache_path):
+      os.remove(cache_path)
+    
   def get_exif_data(self):
-    cache_path = os.path.join(self.album_dir, config.metadata_cache_file_name)
+    cache_path = self.get_metadata_cache()
     
     #check if cache exists and read it if it does
     if os.path.exists(cache_path):

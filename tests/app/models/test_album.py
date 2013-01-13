@@ -101,3 +101,11 @@ class TestAlbum(unittest2.TestCase):
       self.assertEquals(self.album.get_exif_data(), expected)
     finally:
       delete_file(cache_path)
+      
+  def test_cache_file_can_be_deleted(self):
+    cache_path = os.path.join(config.photo_dir, config.metadata_cache_file_name)
+    with file(cache_path, 'a'):
+      os.utime(cache_path, None)
+    
+    self.album.delete_metadata_cache()
+    self.assertFalse(os.path.exists(cache_path))
