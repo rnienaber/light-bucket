@@ -45,7 +45,9 @@ def service_thumbnail(filepath):
   thumbnail = Thumbnail(filepath)
   thumbnail_path = thumbnail.get_path()
   if config.debug:
-    return static_file(thumbnail.get_path(), None)
+    filename = os.path.basename(thumbnail_path)
+    dirname = os.path.dirname(thumbnail_path)
+    return static_file(filename, dirname)
   else:
     redirect(request.url, 302) #thumbnail has been created, let apache serve
 
