@@ -1,7 +1,7 @@
 Installation
 ------------
-http://www.activestate.com/activeperl/downloads
-http://www.lfd.uci.edu/~gohlke/pythonlibs/#pil
+* http://www.activestate.com/activeperl/downloads
+* http://www.lfd.uci.edu/~gohlke/pythonlibs/#pil
 
 Useful Commands
 ---------------
