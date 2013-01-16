@@ -1,2 +1,0 @@
-http://www.activestate.com/activeperl/downloads
-http://www.lfd.uci.edu/~gohlke/pythonlibs/#pil
