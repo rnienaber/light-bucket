@@ -9,6 +9,10 @@ body {
     }
 }
 
+hr {
+    margin: 10px
+}
+
 .navbar-inverse .navbar-inner {
     font-family: 'Grand Hotel', cursive;
     background-color: #ffffff;
@@ -68,9 +72,8 @@ body {
     border: 1px solid #eee;
 }
 
-.box .right{
+.box .muted{
     color: #8C7E7E;
-    float: right;
     text-transform: capitalize;
 }
 
