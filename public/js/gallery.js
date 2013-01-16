@@ -49,6 +49,8 @@ var applyImageData = function (data) {
         });
 };
 
+
+
 var getDateForDisplay = function (date) {
     var result = "";
     switch (date.getDate()) {
@@ -68,7 +70,9 @@ var getDateForDisplay = function (date) {
         default:
             result = 'th';
     }
-    return date.getDate() + result + " at "+date.toTimeString().substr(0,5);
+
+    var name = month[date.getMonth()];
+    return date.getDate() + result + " "+name+"  at "+date.toTimeString().substr(0,5);
 };
 
 function update_exif(event) {
@@ -91,6 +95,21 @@ $(document).ready(function () {
 	$(".update-exif input:submit").click(update_exif);
 	
 });
+
+
+var month = new Array();
+    month[0]="Jan";
+    month[1]="Feb";
+    month[2]="Mar";
+    month[3]="Apr";
+    month[4]="May";
+    month[5]="June";
+    month[6]="July";
+    month[7]="Aug";
+    month[8]="Sept";
+    month[9]="Oct";
+    month[10]="Nov";
+    month[11]="Dec";
 
 //$gallery.imagesLoaded(function(){
 //    $gallery.masonry({

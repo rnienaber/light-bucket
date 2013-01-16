@@ -50,7 +50,7 @@ def parse_response(request):
   return query[1]
   
 def is_authenticated(request):
-  return True
+#  return True
   auth_cookie = get_auth_cookie(request)
   if not auth_cookie: return
   return [u for u in config.users if u['id'] == auth_cookie]
