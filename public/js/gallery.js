@@ -35,6 +35,18 @@ var applyImageData = function (data) {
             var peopleNames = people.join(', ');
             box.find(".person_in_image").text(peopleNames);
         }
+
+        var latitude = data[img]['latitude'];
+        var longitude = data[img]['longitude'];
+
+        if(latitude && longitude){
+            var anchor = box.find(".geotag");
+            anchor.attr('href', "https://maps.google.co.uk/maps?q="+latitude+","+longitude);
+            box.find(".geotag").show();
+        }else{
+            box.find(".geotag").hide();
+        }
+
     });
 
     $('.photo-edit-box').each(function () {
@@ -45,6 +57,8 @@ var applyImageData = function (data) {
             box.find(".comment").text(data[img]['comment']);
             box.find(".subject").val(data[img]['subject']);
             box.find(".keywords").val(data[img]['keywords']);
+            box.find(".latitude").val(data[img]['latitude']);
+            box.find(".longitude").val(data[img]['longitude']);
             box.find(".person_in_image").val(data[img]['person_in_image']);
         });
 };
