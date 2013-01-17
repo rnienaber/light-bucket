@@ -31,6 +31,8 @@ def get_exifs(relative_image_paths, tag_list=None):
   
 def update_exif(relative_image_path, tags):
   full_path = os.path.abspath(os.path.join(config.photo_dir, relative_image_path))
+  print relative_image_path
+  print full_path
   arguments = [full_path, '-overwrite_original_in_place']
   for k in tags.keys():
     key = k.lower()

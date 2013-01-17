@@ -19,7 +19,8 @@
             <img src="{{item.photo}}" alt="">
         </div>
         <div class="span5">
-            <form action="#" class='update-exif form-horizontal' data-update-url='{{item.photo}}/update'>
+            <form action="#" class='update-exif form-horizontal' data-update-url='/api/image/update'>
+				<input type="hidden" name="image_path" value="{{item.photo}}" />
                 <div class="control-group">
                     <label for="title" class="control-label">Title</label>
                     <div class="controls">

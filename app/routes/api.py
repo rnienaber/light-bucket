@@ -13,15 +13,20 @@ def photo_metadata(album_path):
   response.content_type = 'application/json'
   return album.get_exif_data()
 
-@post(config.photo_url_path + '/<image_path:path>/update')  
-def update_photo_metadata(image_path):
+@post('/api/image/update')  
+def update_photo_metadata():
   if not auth.is_authenticated(request):
     return HTTPError(404, "File does not exist.")
   
   values = {}
   for k in request.forms.keys():
     values[k] = request.forms[k]
-  reader.update_exif(image_path, values)
+  
+  image_path = values['image_path']
+  del values['image_path']
+  
+  path_parts = image_path.split('/')
+  reader.update_exif('/'.join(path_parts[2:]), values)
   
   Album(path=os.path.dirname(image_path)).delete_metadata_cache()
   
