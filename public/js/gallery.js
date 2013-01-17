@@ -98,23 +98,15 @@ function update_exif(event) {
 	return false;
 }
 
-$(document).ajaxSend(function() {
+$('.photo-edit-box').ajaxStart(function() {
     $(".saving").show();
-    $(".saved" ).hide();
-    $(".error" ).hide();
 });
 
-$(document).ajaxComplete(function() {
+$('.photo-edit-box').ajaxComplete(function() {
     $(".saving").hide();
-    $(".saved" ).show();
-    $(".error" ).hide();
 });
 
-$(document).ajaxError(function() {
-    $(".saving").hide();
-    $(".saved" ).hide();
-    $(".error" ).show();
-});
+
 
 $(document).ready(function () {
     loadImageData();
