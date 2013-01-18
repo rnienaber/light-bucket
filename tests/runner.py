@@ -18,6 +18,6 @@ if __name__ == "__main__":
   loader = unittest.TestLoader()
   all_tests = loader.discover('./app', pattern='*.py')
   unittest.TextTestRunner().run(all_tests)
-  #suite = unittest.TestLoader().loadTestsFromName('tests.app.test_exif_reader.TestExifReader')
+  #suite = unittest.TestLoader().loadTestsFromName('tests.app.models.test_album.TestAlbum')
   #unittest.TextTestRunner().run(suite)
   

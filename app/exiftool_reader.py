@@ -31,14 +31,12 @@ def get_exifs(relative_image_paths, tag_list=None):
   
 def update_exif(relative_image_path, tags):
   full_path = os.path.abspath(os.path.join(config.photo_dir, relative_image_path))
-  print relative_image_path
-  print full_path
   arguments = [full_path, '-overwrite_original_in_place']
   for k in tags.keys():
     key = k.lower()
     argument = ''
     if key == 'comment': argument = 'xpcomment'
-    if key == 'keywords': argument = 'XPKeywords'
+    if key == 'keywords': argument = 'xpkeywords'
     if key == 'title': argument = 'xptitle'
     if key == 'subject': argument = 'xpsubject'
     if key == 'person_in_image': argument = 'personinimage'

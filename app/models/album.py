@@ -21,13 +21,27 @@ class Album(object):
         raise Exception, "Couldn't match path: '" + str(path) + "'"
       self.year, self.month, self.name = match.groups()
 
-    self.title = self.name.replace('_', ' ').title()
-    self.url_path = '/{0}/{1}/{2}'.format(self.year, self.month, self.name)
-  
     #TODO: add security so you can't list files using relative paths
     self.album_dir = os.path.join(config.photo_dir, self.year, self.month, self.name)
 
-      
+    self.url_path = '/{0}/{1}/{2}'.format(self.year, self.month, self.name)
+  
+  @property
+  def title(self):
+    summary_title = self.summary.get('title')
+    if summary_title:
+      return summary_title
+    else:
+      return self.name.replace('_', ' ').title()
+
+  @property
+  def summary(self):
+    if hasattr(self, 'cached_summary'):
+      return self.cached_summary
+
+    self.cached_summary = get_summary(self.album_dir)
+    return self.cached_summary
+  
   def graphic_files(self):
     for p in os.walk(self.album_dir).next()[2]:
       if p.lower().endswith(('.jpg', '.jpeg')):
@@ -43,9 +57,6 @@ class Album(object):
 
     return getImageInfo(data)
     
-  def get_summary(self):
-    return get_summary(self.album_dir)
-
   def get_image_url(self, image_name):
     return '{0}{1}/{2}'.format(config.photo_url_path, self.url_path, image_name)
     
@@ -97,7 +108,7 @@ class Album(object):
             'month': self.month,
             'album': self.title,
             'name': self.name,
-            'summary': self.get_summary()}
+            'summary': self.summary}
             
   def run_exiftool(self, image_relative_paths):
     return reader.get_exifs(image_relative_paths)

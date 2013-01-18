@@ -15,6 +15,9 @@ class TestAlbum(unittest2.TestCase):
     self.album = Album(path='/2001/02/canoe_the_wye')
     self.album.album_dir = config.photo_dir
 
+  def test_should_pickup_title_from_summary_yaml(self):
+    self.assertEqual(self.album.title, 'Canoe the Wye')
+    
   def test_should_accept_year_month_name(self):
     album = Album('2001', '02', 'canoe_the_wye')
     self.assertEqual(album.year, '2001')
@@ -53,8 +56,9 @@ class TestAlbum(unittest2.TestCase):
     self.assertItemsEqual(self.album.read_image_data('IMG_3277.jpg'), expected)
     
   def test_get_summary(self):
-    summary = self.album.get_summary()
+    summary = self.album.summary
     
+    self.assertEqual(summary['title'], 'Canoe the Wye')
     self.assertEqual(summary['cover-image'], 'wilderness_christmas/100_0009.jpg')
     self.assertEqual(summary['summary'], 'My paragraph\n\nAnother paragraph')
     

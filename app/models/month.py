@@ -31,7 +31,7 @@ class Month(object):
     for album in self.get_albums():
       albums.append({'title': album.title, 
                      'url': album.url_path,
-                     'summary': album.get_summary(),
+                     'summary': album.summary,
                      'first_image_url': album.first_image_url()})
 
     return {'albums': albums,
