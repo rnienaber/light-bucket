@@ -19,6 +19,9 @@ class Year(object):
   def to_view_data(self):
     months_result = []
     for m in self.months():
+        image = m.first_image_url()
+        if image == '':
+          continue
         months_result.append({'month': m.name,
                      'url': m.url_path,
                      'summary': m.get_summary(),

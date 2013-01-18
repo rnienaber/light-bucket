@@ -13,8 +13,11 @@ class Index(object):
     years = []
     for y in sorted(os.walk(config.photo_dir).next()[1], reverse=True):
         year = Year(y)
+        month_images = [m.first_image_url() for m in year.months()]
+        image_url = first([i for i in month_images if i != ''])
+        
         years.append({'view_data': year.to_view_data(),
-                      'first_month_image_url': first(year.months()).first_image_url()})
+                      'image_url': image_url})
 
     return {'years': years,
             'summary': get_summary(config.photo_dir)}

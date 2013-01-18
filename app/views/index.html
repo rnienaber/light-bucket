@@ -24,7 +24,7 @@
                     {% if item.view_data.summary['cover-image'] is defined %}
                     <img src="/thumbnails/{{item.view_data.year}}/{{item.view_data.summary['cover-image']}}">
                     {% else %}
-                    <img src="{{item.first_month_image_url}}">
+                    <img src="{{item.image_url}}">
                     {% endif %}
                   </a>
                 <a href="/{{item.view_data.year}}">{{item.view_data.year}}</a>
