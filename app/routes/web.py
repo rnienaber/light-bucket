@@ -1,5 +1,5 @@
 import os
-from bottle import route, static_file, request, redirect, HTTPError
+from bottle import route, static_file, request, redirect
 
 from utils import get_summary, view
 from config import config
@@ -9,20 +9,17 @@ from models.year import Year
 from models.month import Month
 from models.album import Album
 from models.thumbnail import Thumbnail
-from app import auth
+from app.auth import is_admin
 
 @route('/')
 @view('index')
 def index():
-  data = Index().to_view_data()
-  data['cookie'] = auth.get_auth_cookie(request)
-  return data
+  return Index().to_view_data()
 
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>/edit')
 @view('album_edit')
+@is_admin
 def album_edit(year, month, album):
-  if not auth.is_authenticated(request):
-    return HTTPError(404, "File does not exist.")
   return Album(year, month, album).to_view_data()
   
 @route('/<year:re:\d{4}>/<month:re:\d{2}>/<album>')

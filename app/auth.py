@@ -3,7 +3,7 @@ from urllib import urlencode, quote
 from datetime import datetime
 from urlparse import urlparse
 
-from bottle import request
+from bottle import request, HTTPError
 import requests
 
 from config import config
@@ -48,6 +48,14 @@ def parse_response(request):
   if len(query) < 2: return
   
   return query[1]
+
+def is_admin(func):
+  def wrapped(*args, **kwargs):
+    if is_authenticated(request):
+      return func(*args, **kwargs)
+    return HTTPError(404, "File does not exist.")
+  return wrapped
+
   
 def is_authenticated(request):
 #  return True

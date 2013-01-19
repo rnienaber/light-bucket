@@ -5,7 +5,7 @@ from config import config
 
 from models.album import Album
 import exiftool_reader as reader
-from app import auth
+from app.auth import is_admin
 
 @route('/<album_path:path>/metadata')
 def photo_metadata(album_path):
@@ -14,10 +14,8 @@ def photo_metadata(album_path):
   return album.get_exif_data()
 
 @post('/api/image/update')  
+@is_admin
 def update_photo_metadata():
-  if not auth.is_authenticated(request):
-    return HTTPError(404, "File does not exist.")
-  
   values = {}
   for k in request.forms.keys():
     values[k] = request.forms[k]
