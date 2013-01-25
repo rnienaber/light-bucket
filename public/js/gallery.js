@@ -84,9 +84,9 @@ var getDateForDisplay = function (date) {
         default:
             result = 'th';
     }
-
+	
     var name = month[date.getMonth()];
-    return date.getDate() + result + " "+name+"  at "+date.toTimeString().substr(0,5);
+    return date.getDate() + result + " "+name+"  at "+date.toISOString().substr(11, 5);
 };
 
 function update_exif(event) {
