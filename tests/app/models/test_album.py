@@ -39,7 +39,7 @@ class TestAlbum(unittest2.TestCase):
     self.assertEqual(album.album_dir, os.path.join('images', '2001', '02', 'canoe_the_wye')) 
 
   def test_list_graphic_files(self):
-    expected = ['IMG_3277.jpg', 'IMG_6868.jpg', 'wilderness-01.jpg', 'boris-1.jpg']
+    expected = ['IMG_3277.jpg', 'IMG_6868.jpg',  'P9103882.jpg', 'wilderness-01.jpg', 'boris-1.jpg']
     self.assertItemsEqual(list(self.album.graphic_files()), expected)
     
   def test_first_image_url(self):
@@ -72,7 +72,8 @@ class TestAlbum(unittest2.TestCase):
                 'wilderness-01.jpg': 'data'}
     json_expected = json.dumps(expected)
     
-    expected_paths = ['2001\\02\\canoe_the_wye\\boris-1.jpg',
+    expected_paths = ['2001\\02\\canoe_the_wye\\P9103882.jpg',
+                      '2001\\02\\canoe_the_wye\\boris-1.jpg',
                       '2001\\02\\canoe_the_wye\\IMG_3277.jpg', 
                       '2001\\02\\canoe_the_wye\\IMG_6868.jpg', 
                       '2001\\02\\canoe_the_wye\\wilderness-01.jpg']    

@@ -60,7 +60,7 @@ def normalize_tags(tag_list):
   return tags
 
 def get_tags(file_paths):
-  switches = r'-j -q -personinimage -gpslatitude -gpslongitude -xpcomment -xpkeywords -xpsubject -createdate -xpsubject -xpcomment -xptitle -make -model -c %.8f -d %Y-%m-%dT%H:%M:%S -S'.split(' ')
+  switches = r'-j -q -personinimage -gpslatitude -gpslongitude -xpcomment -xpkeywords -xpsubject -createdate -datecreated -xpsubject -xpcomment -xptitle -make -model -c %.8f -d %Y-%m-%dT%H:%M:%S -S'.split(' ')
   all_files = [os.path.abspath(f) for f in file_paths]
 
   return json.loads(execute(switches + all_files))
@@ -90,6 +90,7 @@ def parse_exif_output(info, tags):
   add_key('XPSubject', 'subject')
   add_key('Make', 'make')
   add_key('Model', 'model')
+  add_key('DateCreated', 'date')
   add_key('CreateDate', 'date')
   add_key('PersonInImage', 'person_in_image', clean_list)
 
