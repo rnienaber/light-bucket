@@ -15,15 +15,21 @@ from app.routes import api, web, admin
 from app.plugins import StripSlashesPlugin
 
 import logging
-logfilename = os.path.join(cwd, 'log', 'passenger_wsgi.log')
-logging.basicConfig(filename=logfilename, level=logging.DEBUG)
-logging.info("Running %s", sys.executable)
-config.logging = logging 
+import logging.handlers
+
+logfilename = os.path.join(cwd, 'log', 'web.log')
+log = logging.getLogger('web')
+log.setLevel(logging.DEBUG)
+handler = logging.handlers.TimedRotatingFileHandler(logfilename, when='D')
+log.addHandler(handler)
+
+
+config.logging = log 
 
 @bottle.error(500)
 def error_handler(error):
   message = " %sURL: %s" % (error.traceback, bottle.request.url)
-  logging.exception(message)
+  log.exception(message)
 
 def bottle_app():
   app = bottle.default_app()
@@ -35,7 +41,7 @@ def application(environ, start_response):
   try:
     return bottle_app().wsgi(environ, start_response)
   except Exception, inst:
-    logging.exception("Error: %s", str(type(inst)))
+    log.exception("Error: %s", str(type(inst)))
     return []
 
 if __name__ == "__main__":
