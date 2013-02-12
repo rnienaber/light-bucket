@@ -20,7 +20,9 @@ class Month(object):
     
   def get_albums(self):
     for e in sorted(os.walk(self.month_dir).next()[1]):
-      yield Album(self.year, self.month, e)
+      album = Album(self.year, self.month, e)
+      if album.first_image_url() != '':
+        yield album
       
   def first_image_url(self):
     album = first(self.get_albums())
