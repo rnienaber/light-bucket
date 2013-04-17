@@ -38,6 +38,8 @@ class Thumbnail(object):
   def get_path(self):
     thumbnail_path = os.path.abspath(self.location())
     photo_path = os.path.abspath(self.photo_path())
+    if not os.path.exists(photo_path):
+      return None
     if os.path.exists(thumbnail_path):
       thumbnail_time = os.path.getmtime(thumbnail_path)
       photo_time = os.path.getmtime(photo_path)

@@ -1,5 +1,5 @@
 import os
-from bottle import route, static_file, request, redirect
+from bottle import route, static_file, request, redirect, abort
 
 from utils import get_summary, view
 from config import config
@@ -41,6 +41,9 @@ def year(year):
 def service_thumbnail(filepath):
   thumbnail = Thumbnail(filepath)
   thumbnail_path = thumbnail.get_path()
+  if not thumbnail_path:
+    abort(404, 'Thumbnail not found')
+
   if config.debug:
     filename = os.path.basename(thumbnail_path)
     dirname = os.path.dirname(thumbnail_path)
