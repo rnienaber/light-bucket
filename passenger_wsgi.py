@@ -33,7 +33,7 @@ def error_handler(error):
 
 def bottle_app():
   app = bottle.default_app()
-  app.install(StripSlashesPlugin())
+  #app.install(StripSlashesPlugin())
   
   return app
 

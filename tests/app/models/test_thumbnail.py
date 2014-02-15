@@ -56,7 +56,7 @@ class TestThumbnail(unittest2.TestCase):
     with open(thumbnail_path, 'rb') as photo_file:
       data = photo_file.read(81000)
 
-    self.assertEquals(getImageInfo(data), ('image/jpeg', 260, 173))
+    self.assertEquals(getImageInfo(data), ('image/jpeg', 300, 199))
     
   def test_should_recreate_thumbnail_if_older_than_photo(self):
     photo_path = os.path.join(config.photo_dir, 'wilderness-01.jpg')
@@ -71,7 +71,7 @@ class TestThumbnail(unittest2.TestCase):
     with open(thumbnail_path, 'rb') as photo_file:
       data = photo_file.read(81000)
 
-    self.assertEquals(getImageInfo(data), ('image/jpeg', 260, 145))
+    self.assertEquals(getImageInfo(data), ('image/jpeg', 300, 168))
     
   def test_should_handle_partial_directories(self):
     os.makedirs(os.path.join(config.thumbnail_dir, 'first', 'second'))
@@ -81,16 +81,3 @@ class TestThumbnail(unittest2.TestCase):
       
     thumbnail = Thumbnail('/wilderness-01.jpg')
     thumbnail_path = thumbnail.get_path()
-
-  def test_should_only_resize_on_width(self):
-    photo_path = os.path.join(config.photo_dir, 'boris-1.jpg')
-    thumbnail_path = os.path.join(config.thumbnail_dir, 'boris-1.jpg')
-    shutil.copy2(photo_path, thumbnail_path)
-    
-    thumbnail = Thumbnail('/boris-1.jpg')
-    thumbnail_path = thumbnail.get_path()
-    
-    with open(thumbnail_path, 'rb') as photo_file:
-      data = photo_file.read(81000)
-
-    self.assertEquals(getImageInfo(data), ('image/jpeg', 260, 346))

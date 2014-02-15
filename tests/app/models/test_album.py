@@ -72,11 +72,12 @@ class TestAlbum(unittest2.TestCase):
                 'wilderness-01.jpg': 'data'}
     json_expected = json.dumps(expected)
     
-    expected_paths = ['2001\\02\\canoe_the_wye\\P9103882.jpg',
-                      '2001\\02\\canoe_the_wye\\boris-1.jpg',
-                      '2001\\02\\canoe_the_wye\\IMG_3277.jpg', 
-                      '2001\\02\\canoe_the_wye\\IMG_6868.jpg', 
-                      '2001\\02\\canoe_the_wye\\wilderness-01.jpg']    
+    expected_paths = ['2001\\02\\canoe_the_wye\\P9103882.jpg'.replace('\\', os.sep),
+                      '2001\\02\\canoe_the_wye\\boris-1.jpg'.replace('\\', os.sep),
+                      '2001\\02\\canoe_the_wye\\IMG_3277.jpg'.replace('\\', os.sep),
+                      '2001\\02\\canoe_the_wye\\IMG_6868.jpg'.replace('\\', os.sep),
+                      '2001\\02\\canoe_the_wye\\wilderness-01.jpg'.replace('\\', os.sep)]
+
     
     def dummy_run_exiftool(relative_paths):
       self.assertItemsEqual(relative_paths, expected_paths)
