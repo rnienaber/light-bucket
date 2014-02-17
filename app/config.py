@@ -27,6 +27,7 @@ class Config(object):
     self.thumbnail_dir = path.join(self.public_dir, 'thumbnails')
     self.photo_dir = path.join(self.public_dir, 'photos')
     self.lib_dir = path.join(self.root_dir, 'lib')
+    self.db_dir = path.join(self.root_dir, 'db')
 
     self.exiftool_path = path.join(self.lib_dir, 'exiftool')
     self.exiftool_script_path = path.join(self.exiftool_path, 'exiftool.pl')
