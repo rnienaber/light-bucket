@@ -15,7 +15,8 @@
 <div id="gallery" class="row">
 
     <div class="box navigation">
-        <h1>{{year}} - {{month_name}} - {{album}}</h1>
+        <h1>{{year}} - {{month_name}}</h1>
+        <div class="albumname">{{album}}</div>
         <div>{{summary['summary'] | nl2p}}</div>
         <p>See more photos from <a href="/{{year}}/{{month}}">{{month_name}}</a></p>
     </div>
